@@ -30,6 +30,7 @@ def telegram(msg):
     markup.add(types.InlineKeyboardButton("Telegram:", url="https://t.me/YerbolZ"))
     bot.send_message(msg.chat.id, "Telegram", reply_markup=markup)
 
+# Hello! Below just random comments.
 # @bot.message_handler(content_types=['text'])
 # def get_user_text(message):
 #     if message.text == "Hello":
