@@ -31,6 +31,7 @@ def telegram(msg):
     bot.send_message(msg.chat.id, "Telegram", reply_markup=markup)
 
 # Hello! Below just random comments.
+# They are not necessary
 # @bot.message_handler(content_types=['text'])
 # def get_user_text(message):
 #     if message.text == "Hello":
