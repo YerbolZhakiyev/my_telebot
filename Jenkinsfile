@@ -2,15 +2,6 @@ pipeline {
     agent any
     
     stages {
-
-	stage('Delete Repository') {
-            steps {
-		script {
-                // Delete old repository
-		sh 'rm -rf var/jenkins_home/workspace/'First pipeline'/*'
-            	}
-	    }
-        }
         stage('Clone Repository') {
             steps {
 		script {
