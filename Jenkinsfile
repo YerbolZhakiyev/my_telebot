@@ -4,9 +4,12 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
+		script {
                 // Clone the repository
-               sh 'git clone https://github.com/YerbolZhakiyev/my_telebot.git'
-            }
+		sh 'rm -rf .git	'
+                sh 'git clone https://github.com/YerbolZhakiyev/my_telebot.git'
+            	}
+	    }
         }
         
 	stage('Build') {
