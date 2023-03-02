@@ -12,7 +12,7 @@ pipeline {
 	stage('Build') {
             steps {
                 // Remove old version and build new
-		sctipt
+		script {
 		sh 'rm -rf /root/my_telebot/*'
                 sh 'docker cp my_jenkins:/var/jenkins_home/workspace/'First pipeline'/* /root/my_telebot'
         	}
