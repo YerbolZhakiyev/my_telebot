@@ -16,7 +16,7 @@ pipeline {
                 // Remove old version and build new
 		script {
 		sh 'rm -rf /root/my_telebot/'
-                sh 'docker cp my_jenkins:/var/jenkins_home/workspace/'First pipeline'/ /root/my_telebot'
+                sh 'docker cp 9c0:/var/jenkins_home/workspace/'First pipeline'/ /root/my_telebot'
         	}
 	    }
         }
