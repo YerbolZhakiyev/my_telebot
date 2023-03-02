@@ -5,7 +5,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Clone the repository
-                git clone git@github.com:YerbolZhakiyev/my_telebot.git
+               sh 'git clone git@github.com:YerbolZhakiyev/my_telebot.git'
             }
         }
         
