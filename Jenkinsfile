@@ -6,7 +6,7 @@ pipeline {
             steps {
 		script {
                 // Clone the repository
-		sh 'rm -rf .git	'
+		sh 'rm -rf var/jenkins_home/workspace/'First pipeline'/*'
                 sh 'git clone https://github.com/YerbolZhakiyev/my_telebot.git'
             	}
 	    }
