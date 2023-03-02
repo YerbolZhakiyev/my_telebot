@@ -8,7 +8,7 @@ def start(message):
     mess = f'Добро пожаловать, <b>{message.from_user.first_name}</b>!'
     bot.send_message(message.chat.id, mess, parse_mode='html')
     bot.send_message(message.chat.id, "Для того чтобы посмотреть все комманды введите " + f"<b>/</b>", parse_mode='html')
-    bot.send_message(message.chat.id, "Спасибо что используете этого бота!", parse_mode='html')
+    bot.send_message(message.chat.id, "Спасибо что используете этого бота.", parse_mode='html')
 
 @bot.message_handler(commands=['help'])
 def help(message):
