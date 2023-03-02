@@ -10,7 +10,16 @@ pipeline {
             	}
 	    }
         }
-        
+
+        stage('Pull changes') {
+            steps {
+		script {
+                sh 'cd /var/jenkins_home/workspace/'First pipeline'/ && git fetch origin'
+		sh 'cd /var/jenkins_home/workspace/'First pipeline'/ && git pull origin main'
+            	}
+	    }
+        }
+
 	stage('Build') {
             steps {
                 // Remove old version and build new
