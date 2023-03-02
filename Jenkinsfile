@@ -2,11 +2,19 @@ pipeline {
     agent any
     
     stages {
+
+	stage('Delete Repository') {
+            steps {
+		script {
+                // Delete old repository
+		sh 'rm -rf var/jenkins_home/workspace/'First pipeline'/*'
+            	}
+	    }
+        }
         stage('Clone Repository') {
             steps {
 		script {
                 // Clone the repository
-		sh 'rm -rf var/jenkins_home/workspace/'First pipeline'/*'
                 sh 'git clone https://github.com/YerbolZhakiyev/my_telebot.git'
             	}
 	    }
