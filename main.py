@@ -2,7 +2,7 @@ import telebot
 from telebot import types
 import psycopg2
 import time
-# Connect to db
+#-----------------------Connect to db
 conn = psycopg2.connect(dbname='tg_bot',
                         user='postgres', 
                         password='password',
@@ -27,24 +27,22 @@ def start(message):
     cursor.execute(sql_query_to_check_primary_key, (id_of_customer,))
     result = cursor.fetchone()
     if result is None:
-#-----------Добавление нового пользователя в базу данных
+#-------------------------------------
         cursor.execute("INSERT INTO customers (name, tg_id) VALUES (%s, %s)", (name_of_customer, id_of_customer))
         conn.commit()
-
+#-------------------------------------
 @bot.message_handler(commands=['insta'])
 def insta(msg):
     markup = types.InlineKeyboardMarkup()
     markup.add(types.InlineKeyboardButton("Instagram:", url="https://www.instagram.com/zhakiev/"))
     bot.send_message(msg.chat.id, "Instagram", reply_markup=markup)
-
+#-------------------------------------
 @bot.message_handler(commands=['telegram'])
 def telegram(msg):
     markup = types.InlineKeyboardMarkup()
     markup.add(types.InlineKeyboardButton("Telegram:", url="https://t.me/YerbolZ"))
     bot.send_message(msg.chat.id, "Telegram", reply_markup=markup)
-
-
-
+#-------------------------------------
 def get_order_id():
     return int(time.time())
 @bot.message_handler(commands=['create_order'])
@@ -81,8 +79,7 @@ def get_phone(message, id):
     with open('/Users/erbol/Desktop/my_telebot/image2.jpeg', 'rb') as photo:
         bot.send_photo(message.chat.id, photo) 
     bot.send_message(message.chat.id, 'Заказ успешно создан! Номер вашего заказа: ' + id_for_text + ' Спасибо!')
-
-
+#-------------------------------------
 row_num = 0
 @bot.message_handler(commands=['all_orders'])
 def send_orders(message):
@@ -114,10 +111,9 @@ def send_orders(message):
             row_num = 0
         bot.send_message(chat_id, format_order_row(rows[row_num]), reply_markup=markup)
         return handle_next_order
-
 def format_order_row(row):
     return f"ID заказа: {row[0]}\nОписание: {row[1]}\nОткуда: {row[2]}\nКуда: {row[3]}\nВес: {row[4]}\nТелефон: {row[5]}"
-
+#-------------------------------------
 cursor.close()
 conn.close()
 bot.polling(non_stop=True)        
