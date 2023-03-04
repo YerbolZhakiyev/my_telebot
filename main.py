@@ -2,7 +2,7 @@ import telebot
 from telebot import types
 import psycopg2
 import time
-#-----------------------Connect to db
+#-------------------Connect to db
 conn = psycopg2.connect(dbname='tg_bot',
                         user='postgres', 
                         password='password',
