@@ -4,9 +4,10 @@ import psycopg2
 import time
 # Connect to db
 conn = psycopg2.connect(dbname='tg_bot',
-                        user='erbol', 
+                        user='postgres', 
                         password='password',
-                        host='localhost')
+                        host='64.227.127.179',
+                        port='5432')
 cursor = conn.cursor()
 
 bot = telebot.TeleBot('5875110972:AAEPOJgUjDXJpX3IOxOFO0MlthWOg980UZg')        
@@ -118,5 +119,6 @@ def send_orders(message):
 def format_order_row(row):
     return f"ID заказа: {row[0]}\nОписание: {row[1]}\nОткуда: {row[2]}\nКуда: {row[3]}\nВес: {row[4]}\nТелефон: {row[5]}"
 
-cursor.close
+cursor.close()
+conn.close()
 bot.polling(non_stop=True)        
