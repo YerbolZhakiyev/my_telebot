@@ -115,7 +115,6 @@ def send_orders(message):
         bot.send_message(chat_id, format_order_row(rows[row_num]), reply_markup=markup)
         return handle_next_order
 
-# функция для форматирования строки заказа
 def format_order_row(row):
     return f"ID заказа: {row[0]}\nОписание: {row[1]}\nОткуда: {row[2]}\nКуда: {row[3]}\nВес: {row[4]}\nТелефон: {row[5]}"
 
