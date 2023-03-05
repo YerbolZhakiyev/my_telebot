@@ -76,7 +76,7 @@ def get_phone(message, id):
     id_for_text = str(id)
     cursor.execute("UPDATE orders SET phone = %s WHERE id = %s", (message.text, id))
     conn.commit()         
-    with open('/Users/erbol/Desktop/my_telebot/image2.jpeg', 'rb') as photo:
+    with open('/root/my_telebot/image2.jpeg', 'rb') as photo:
         bot.send_photo(message.chat.id, photo) 
     bot.send_message(message.chat.id, 'Заказ успешно создан! Номер вашего заказа: ' + id_for_text + ' Спасибо!')
 #-------------------------------------
@@ -115,5 +115,4 @@ def format_order_row(row):
     return f"ID заказа: {row[0]}\nОписание: {row[1]}\nОткуда: {row[2]}\nКуда: {row[3]}\nВес: {row[4]}\nТелефон: {row[5]}"
 #-------------------------------------
 cursor.close()
-conn.close()
 bot.polling(non_stop=True)        

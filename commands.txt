@@ -1,3 +1,4 @@
 create_order - Создать заказ
+all_orders - Посмотреть заказы
 insta - Мой Инстаграмм
 telegram - Мой Телеграм
