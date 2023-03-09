@@ -3,6 +3,7 @@ services:
   jenkins:
     image: jenkins/jenkins
     user: root
+    container_name: my_jenkins
     ports:
       - "8080:8080"
       - "50000:50000"
