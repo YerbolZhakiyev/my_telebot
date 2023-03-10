@@ -12,11 +12,9 @@ def index():
                         host='64.227.127.179',
                         port='5432')
 	cursor = conn.cursor()
-
 	cursor.execute("SELECT * FROM orders")
 	orders = cursor.fetchall()
 	cursor.close()
-   conn.close()
    return render_template('index.html', orders=orders)
  if __name__ == '__main__':
     app.run(port=80)
