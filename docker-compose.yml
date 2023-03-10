@@ -9,12 +9,12 @@ services:
       - "50000:50000"
     volumes:
       - /var/lib/docker/volumes/jenkins_volume/_data:/var/jenkins_home
+      - /root/.ssh:/var/jenkins_home/.ssh
     restart: always
-    depends_on:
-      - db
   db:
     image: postgres
     restart: always
+    user: root
     environment:
       POSTGRES_USER: erbol
       POSTGRES_PASSWORD: password
