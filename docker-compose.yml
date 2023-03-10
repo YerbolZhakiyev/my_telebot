@@ -23,3 +23,8 @@ services:
       - /var/lib/postgresql/data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+  ngnx:
+    image: nginx
+    ports:
+      - "80:80"
+      - "443:443"
