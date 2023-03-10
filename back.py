@@ -16,7 +16,7 @@ def index():
 	cursor.execute("SELECT * FROM orders")
 	orders = cursor.fetchall()
 	cursor.close()
-    conn.close()
-    return render_template('index.html', orders=orders)
+   conn.close()
+   return render_template('index.html', orders=orders)
  if __name__ == '__main__':
     app.run(port=80)
