@@ -33,6 +33,7 @@ services:
       - "5432:5432"
   nginx:
     image: nginx
+    user: root
     ports:
       - "80:80"
     volumes:
