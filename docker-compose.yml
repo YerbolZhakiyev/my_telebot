@@ -39,3 +39,5 @@ services:
     volumes:
       - /root/my_telebot/nginx/nginx.conf:/etc/nginx/nginx.conf
     restart: always
+    depends_on:
+      - app
