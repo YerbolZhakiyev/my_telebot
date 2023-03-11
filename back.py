@@ -19,5 +19,6 @@ def get_orders():
    for row in rows:
       data.append({'id': row[0], 'description': row[1], 'weight': row[2], 'from_address': row[3], 'to_address': row[4], 'phone': row[5]})
    return jsonify({'data': data})
+   
 if __name__ == '__main__':
     app.run()
