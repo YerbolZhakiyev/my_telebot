@@ -13,15 +13,9 @@ conn = psycopg2.connect(
 cursor = conn.cursor()
 
 app = Flask(__name__)
+@app.route('/')
+   return "Hello"
 
-@app.route('/orders')
-def get_orders():
-   cursor.execute("SELECT * FROM orders")
-   rows = cursor.fetchall()
-   data = []
-   for row in rows:
-      data.append({'id': row[0], 'description': row[1], 'weight': row[2], 'from_address': row[3], 'to_address': row[4], 'phone': row[5]})
-   return jsonify({'data': data})
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
