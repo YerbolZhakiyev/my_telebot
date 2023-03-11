@@ -4,7 +4,7 @@ version: '3'
 services:
   app:
     build: ./app
-    container_name: my_flask
+    container_name: my_app
     restart: always
     ports:
       - "8000:8000"
@@ -37,3 +37,4 @@ services:
       - "80:80"
     volumes:
       - /root/my_telebot/nginx/nginx.conf:/etc/nginx/nginx.conf
+    restart: always
