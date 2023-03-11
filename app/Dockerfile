@@ -1,9 +1,6 @@
-FROM python:3.9
-
-WORKDIR /root/my_telebot/app
-COPY requirements.txt /root/my_telebot/app
-RUN pip install -r requirements.txt
-
-EXPOSE 5000
-
-COPY . /root/my_telebot/app
+FROM python:latest
+WORKDIR /app
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
+COPY . .
+CMD ["python3", "back.py"]

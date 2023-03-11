@@ -3,14 +3,11 @@ version: '3'
 # docker-compose -f docker-compose.yml up -d
 services:
   app:
-    build: /root/my_telebot/app
+    build: ./app
     container_name: my_flask
-    command: gunicorn --bind 0.0.0.0:5000 app:app
-    volumes: 
-      - /root/my_telebot/app:/app
-    expose: 
-      - 5000
     restart: always
+    ports:
+      - "8000:8000"
   jenkins:
     image: jenkins/jenkins
     user: root
