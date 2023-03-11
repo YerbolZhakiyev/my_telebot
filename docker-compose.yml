@@ -35,9 +35,9 @@ services:
     ports:
       - "5432:5432"
   ngnx:
-    image: nginx
+    build: /root/my_telebot/nginx
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - /root/html:/usr/share/nginx/html
+      - 
