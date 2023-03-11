@@ -4,10 +4,13 @@ version: '3'
 services:
   app:
     build: ./app
+    user: root
     container_name: my_app
     restart: always
     ports:
       - "8000:8000"
+    networks:
+      - app-network
   jenkins:
     image: jenkins/jenkins
     user: root
@@ -41,3 +44,7 @@ services:
     restart: always
     depends_on:
       - app
+    networks:
+      - app-network
+networks:
+  app-network:
