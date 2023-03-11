@@ -31,8 +31,9 @@ services:
       - /var/lib/postgresql/data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-  ngnx:
-    build: /root/my_telebot/nginx
+  nginx:
+    image: nginx
     ports:
       - "80:80"
-      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
