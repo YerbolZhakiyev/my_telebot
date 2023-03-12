@@ -44,5 +44,5 @@ services:
     restart: always
     depends_on:
       - web
-   app:
+  app:
     build: ./app
