@@ -14,15 +14,14 @@ cursor = conn.cursor()
 app = Flask(__name__)
 @app.route('/')
 def index():
+	cursor.execute("SELECT * FROM orders")
+	rows = cursor.fetchall()
+	results = []
+	for row in rows:
+		results.append({'id': row[0], 'description': row[1], 'from_address': row[2], 'to_address': row[3], 'weight': row[4], 'phone': row[5]})
 
-    cursor.execute("SELECT * FROM orders")
-    rows = cursor.fetchall()
-    results = []
-    for row in rows:
-        results.append({'id': row[0], 'description': row[1], 'from_address': row[2], 'to_address': row[3], 'weight': row[4], 'phone': row[5]})
-
-    return results
-    # render_template('index.html', data=data)
+	return results
+	#render_template('index.html', data=data)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+	app.run(debug=True)
