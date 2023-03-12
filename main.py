@@ -4,7 +4,7 @@ import psycopg2
 import time
 #-------------------Connect to db
 conn = psycopg2.connect(dbname='tg_bot',
-                        user='postgres', 
+                        user='erbol', 
                         password='password',
                         host='64.227.127.179',
                         port='5432')
