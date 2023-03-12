@@ -6,7 +6,7 @@ import json
 app = Flask(__name__)
 @app.route('/')
 def index():
-    data = json.load(open('app/data.json', 'r'))
+    data = json.load(open('data.json', 'r'))
     return render_template('index.html', data=data)
 
 @app.route('/about')
