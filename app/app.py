@@ -1,4 +1,4 @@
-import psycopg2-binary
+import psycopg2
 import json
 conn = psycopg2.connect(dbname='tg_bot',
                         user='postgres', 
