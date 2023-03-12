@@ -114,5 +114,5 @@ def send_orders(message):
 def format_order_row(row):
     return f"ID заказа: {row[0]}\nОписание: {row[1]}\nОткуда: {row[2]}\nКуда: {row[3]}\nВес: {row[4]}\nТелефон: {row[5]}"
 #-------------------------------------
-cursor.close()
+
 bot.polling(non_stop=True)        
