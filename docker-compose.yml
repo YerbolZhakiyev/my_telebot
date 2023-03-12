@@ -12,6 +12,8 @@ services:
     volumes:
       - /root/my_telebot/web/index.html:/my_telebot/web/templates/index.html
       - /root/my_telebot/app/data.json:/my_telebot/web/data.json
+    depends_on:
+      - app
   jenkins:
     image: jenkins/jenkins
     user: root
