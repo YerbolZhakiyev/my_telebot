@@ -11,7 +11,7 @@ services:
       - "8000:8000"
     volumes:
       - /root/my_telebot/web/index.html:/my_telebot/web/index.html
-      - /root/my_telebot/app/data.json:/my_telebot/app/data.json
+      - /root/my_telebot/app/data.json:/my_telebot/web/data.json
   jenkins:
     image: jenkins/jenkins
     user: root
