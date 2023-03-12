@@ -2,10 +2,10 @@ version: '3'
 # docker-compose -f docker-compose.yml build 
 # docker-compose -f docker-compose.yml up -d
 services:
-  app:
-    build: ./app
+  web:
+    build: ./web
     user: root
-    container_name: my_app
+    container_name: my_web
     restart: always
     ports:
       - "8000:8000"
@@ -41,4 +41,4 @@ services:
       - /root/my_telebot/nginx/nginx.conf:/etc/nginx/nginx.conf
     restart: always
     depends_on:
-      - app
+      - web
