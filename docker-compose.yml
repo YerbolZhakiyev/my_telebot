@@ -10,7 +10,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - /root/my_telebot/web/index.html:/my_telebot/web/index.html
+      - /root/my_telebot/web/index.html:/my_telebot/web/templates/index.html
       - /root/my_telebot/app/data.json:/my_telebot/web/data.json
   jenkins:
     image: jenkins/jenkins
