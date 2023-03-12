@@ -1,5 +1,5 @@
 import requests
 import json
 
-r = request.get('http://my_web')
+r = requests.get('http://web')
 print(r.json())

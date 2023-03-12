@@ -7,8 +7,6 @@ services:
     user: root
     container_name: my_web
     restart: always
-    ports:
-      - "8000:8000"
     volumes:
       - /root/my_telebot/web/index.html:/my_telebot/web/templates/index.html
       - /root/my_telebot/app/data.json:/my_telebot/web/data.json
@@ -50,3 +48,5 @@ services:
   app:
     build: ./app
     container_name: my_app
+    ports:
+      - "8000:8000"
