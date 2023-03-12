@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     data = json.load(open('data.json', 'r'))
-    return render_template('/my_telebot/app/index.html', data=data)
+    return render_template('/my_telebot/web/index.html', data=data)
 
 @app.route('/about')
 def about():
