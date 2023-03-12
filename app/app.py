@@ -11,7 +11,7 @@ rows = cursor.fetchall()
 results = []
 for row in rows:
     results.append({'id': row[0], 'description': row[1], 'from_address': row[2], 'to_address': row[3], 'weight': row[4], 'phone': row[5]})
-with open('app/data.json', 'w', encoding='utf-8') as f:
+with open('data.json', 'w', encoding='utf-8') as f:
     json.dump(results, f, ensure_ascii=False)
 cursor.close()
 conn.close()
