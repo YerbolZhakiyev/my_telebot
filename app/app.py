@@ -15,7 +15,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
 
-	cursor.execute("SELECT * FROM orders")
+    cursor.execute("SELECT * FROM orders")
     rows = cursor.fetchall()
     results = []
     for row in rows:
