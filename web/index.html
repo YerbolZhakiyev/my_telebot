@@ -27,12 +27,12 @@
 		<tbody>
 			{% for row in data %}
 			<tr>
-				<td>{{ row['column1'] }}</td>
-				<td>{{ row['column2'] }}</td>
-				<td>{{ row['column3'] }}</td>
-				<td>{{ row['column4'] }}</td>
-				<td>{{ row['column5'] }}</td>
-				<td>{{ row['column6'] }}</td>
+				<td>{{ row['id'] }}</td>
+				<td>{{ row['description'] }}</td>
+				<td>{{ row['from_address'] }}</td>
+				<td>{{ row['to_address'] }}</td>
+				<td>{{ row['weight'] }}</td>
+				<td>{{ row['phone'] }}</td>
 			</tr>
 			{% endfor %}
 		</tbody>

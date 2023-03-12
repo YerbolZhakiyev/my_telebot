@@ -10,7 +10,7 @@ cursor.execute("SELECT * FROM orders")
 rows = cursor.fetchall()
 results = []
 for row in rows:
-    results.append({'column1': row[0], 'column2': row[1], 'column3': row[2], 'column4': row[3], 'column5': row[4], 'column6': row[5]})
+    results.append({'id': row[0], 'description': row[1], 'from_address': row[2], 'to_address': row[3], 'weight': row[4], 'phone': row[5]})
 with open('app/data.json', 'w', encoding='utf-8') as f:
     json.dump(results, f, ensure_ascii=False)
 cursor.close()
