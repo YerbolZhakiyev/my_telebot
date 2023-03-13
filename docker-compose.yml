@@ -25,7 +25,7 @@ services:
     environment:
       POSTGRES_USER: erbol
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: tg-bot
+      POSTGRES_DB: tg_bot
     volumes:
       - /var/lib/postgresql/data:/var/lib/postgresql/data
     ports:
