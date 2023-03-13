@@ -1,6 +1,4 @@
 import psycopg2
-import json
-import time
 from flask import Flask, render_template, jsonify
 
 conn = psycopg2.connect(dbname='tg_bot',
@@ -21,7 +19,6 @@ def index():
 		results.append({'id': row[0], 'description': row[1], 'from_address': row[2], 'to_address': row[3], 'weight': row[4], 'phone': row[5]})
 
 	return results
-	#render_template('index.html', data=data)
 
 if __name__ == '__main__':
 	app.run(debug=True)

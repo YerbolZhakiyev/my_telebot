@@ -2,15 +2,12 @@ version: '3'
 # docker-compose -f docker-compose.yml build 
 # docker-compose -f docker-compose.yml up -d
 services:
-  web:
-    build: ./web
+  tg_request:
+    build: ./tg_request
     user: root
-    container_name: my_web
-    volumes:
-      - /root/my_telebot/web/index.html:/my_telebot/web/templates/index.html
-      - /root/my_telebot/app/data.json:/my_telebot/web/data.json
+    container_name: my_tg_request
     depends_on:
-      - app
+      - backend
   jenkins:
     image: jenkins/jenkins
     user: root
@@ -20,7 +17,6 @@ services:
       - "50000:50000"
     volumes:
       - /var/lib/docker/volumes/jenkins_volume/_data:/var/jenkins_home
-      - /root/.ssh:/var/jenkins_home/.ssh
     restart: always
   db:
     image: postgres
@@ -44,8 +40,8 @@ services:
     restart: always
     depends_on:
       - web
-  app:
-    build: ./app
-    container_name: my_app
+  backend:
+    build: ./backend
+    container_name: my_backend
     ports:
       - "8000:8000"
