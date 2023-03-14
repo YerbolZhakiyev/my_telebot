@@ -3,7 +3,8 @@ from flask import Flask, render_template, jsonify
 import json
 from dotenv import load_dotenv, find_dotenv
 import os
-load_dotenv(find_dotenv(raise_error_if_not_found=True))
+dotenv_path = find_dotenv()
+load_dotenv(dotenv_path)
 DB_NAME = os.getenv('DATABASENAME')
 DB_USER = os.getenv('DATABASEUSER')
 DB_PASSWORD = os.getenv('DATABASEPASSWORD')

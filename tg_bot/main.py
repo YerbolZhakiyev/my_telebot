@@ -4,7 +4,8 @@ import psycopg2
 import time
 from dotenv import load_dotenv, find_dotenv
 import os
-load_dotenv(find_dotenv(raise_error_if_not_found=True))
+dotenv_path = find_dotenv()
+load_dotenv(dotenv_path)
 TOKEN = os.getenv('TGTOKEN')
 DB_NAME = os.getenv('DATABASENAME')
 DB_USER = os.getenv('DATABASEUSER')
