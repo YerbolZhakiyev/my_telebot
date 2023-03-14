@@ -28,8 +28,6 @@ services:
       POSTGRES_DB: tg_bot
     volumes:
       - /var/lib/postgresql/data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
   nginx:
     image: nginx
     user: root
@@ -45,3 +43,7 @@ services:
     container_name: my_backend
     ports:
       - "8000:8000"
+  tg_bot:
+    build: ./tg_bot
+    volumes:
+      - /root/my_telebot/tg_bot:/tg_bot

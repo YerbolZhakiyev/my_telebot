@@ -4,7 +4,7 @@ from flask import Flask, render_template, jsonify
 conn = psycopg2.connect(dbname='tg_bot',
                         user='erbol', 
                         password='password',
-                        host='64.227.127.179',
+                        host='db',
                         port='5432')
 
 cursor = conn.cursor()
