@@ -6,6 +6,8 @@ services:
     build: ./tg_request
     user: root
     container_name: my_tg_request
+    volumes:
+      - /root/my_telebot/backend/.env:/backend/
     depends_on:
       - backend
   jenkins:
@@ -47,3 +49,4 @@ services:
     build: ./tg_bot
     volumes:
       - /root/my_telebot/tg_bot:/tg_bot
+      - /root/my_telebot/tg_bot/.env:/tg_bot/
