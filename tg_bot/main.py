@@ -76,7 +76,7 @@ def get_phone(message, id):
     id_for_text = str(id)
     cursor.execute("UPDATE orders SET phone = %s WHERE id = %s", (message.text, id))
     conn.commit()         
-    with open('/root/my_telebot/image2.jpeg', 'rb') as photo:
+    with open('tg_bot/image2.jpeg', 'rb') as photo:
         bot.send_photo(message.chat.id, photo) 
     bot.send_message(message.chat.id, 'Заказ успешно создан! Номер вашего заказа: ' + id_for_text + ' Спасибо!')
 #-------------------------------------
