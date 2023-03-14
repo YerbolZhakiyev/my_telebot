@@ -1,5 +1,5 @@
 import psycopg2
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, Response
 import json
 from dotenv import load_dotenv, find_dotenv
 import os
@@ -17,7 +17,7 @@ conn = psycopg2.connect(dbname=DB_NAME,
 cursor = conn.cursor()
 
 app = Flask(__name__)
-app.config['JSON_AS_ASCII'] = False
+
 @app.route('/')
 def index():
 	cursor.execute("SELECT * FROM orders")
@@ -25,10 +25,10 @@ def index():
 	results = []
 	for row in rows:
 		results.append({'id': row[0], 'description': row[1], 'from_address': row[2], 'to_address': row[3], 'weight': row[4], 'phone': row[5]})
-	# json_data = json.dumps(results, ensure_ascii=False)
-	return jsonify({
+	orders = json.dumps({
 		'data': results
-	})
+		}, ensure_ascii = False)
+	return Response(orders,content_type="application/json; charset=utf-8" )
 
 if __name__ == '__main__':
 	app.run(debug=True)
