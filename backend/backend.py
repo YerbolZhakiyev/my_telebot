@@ -28,7 +28,7 @@ def index():
 	orders = json.dumps({
 		'data': results
 		}, ensure_ascii = False)
-	return Response(orders,content_type="application/json" )
+	return Response(orders,content_type="application/json; charset=utf-8" )
 
 if __name__ == '__main__':
 	app.run(debug=True)
