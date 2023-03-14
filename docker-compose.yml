@@ -2,14 +2,6 @@ version: '3'
 # docker-compose -f docker-compose.yml build 
 # docker-compose -f docker-compose.yml up -d
 services:
-  tg_request:
-    build: ./tg_request
-    user: root
-    container_name: my_tg_request
-    volumes:
-      - /root/my_telebot/backend/.env:/backend/
-    depends_on:
-      - backend
   jenkins:
     image: jenkins/jenkins
     user: root
