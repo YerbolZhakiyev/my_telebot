@@ -2,3 +2,4 @@ requests
 pyTelegramBotAPI
 psycopg2-binary
 python-dotenv
+requests

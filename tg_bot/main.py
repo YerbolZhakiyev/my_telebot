@@ -4,6 +4,10 @@ import psycopg2
 import time
 from dotenv import load_dotenv, find_dotenv
 import os
+import requests
+import json
+
+
 dotenv_path = find_dotenv()
 load_dotenv(dotenv_path)
 TOKEN = os.getenv('TGTOKEN')
@@ -122,5 +126,14 @@ def send_orders(message):
 def format_order_row(row):
     return f"ID заказа: {row[0]}\nОписание: {row[1]}\nОткуда: {row[2]}\nКуда: {row[3]}\nВес: {row[4]}\nТелефон: {row[5]}"
 #-------------------------------------
+
+request1 = requests.get('http://backend/orders:8000')
+print(request1.json())
+
+
+
+
+
+
 
 bot.polling(non_stop=True)        
