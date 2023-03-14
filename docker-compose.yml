@@ -49,4 +49,4 @@ services:
     build: ./tg_bot
     volumes:
       - /root/my_telebot/tg_bot:/tg_bot
-      - /root/my_telebot/tg_bot/.env:/tg_bot/
+      - /root/my_telebot/tg_bot/.env:/tg_bot/.env
