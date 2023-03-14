@@ -5,8 +5,6 @@ from dotenv import load_dotenv, find_dotenv
 import os
 dotenv_path = find_dotenv()
 load_dotenv(dotenv_path)
-test = os.getenv('TEST')
-print(test)
 DB_NAME = os.getenv('DATABASENAME')
 DB_USER = os.getenv('DATABASEUSER')
 DB_PASSWORD = os.getenv('DATABASEPASSWORD')
