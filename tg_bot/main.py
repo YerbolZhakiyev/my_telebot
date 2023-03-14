@@ -128,8 +128,9 @@ def format_order_row(row):
 #-------------------------------------
 
 request1 = requests.get('http://backend:8000/orders')
-print(request1.json())
-
+json_body = json.loads(request1)
+orders_array = json_body['orders']
+print(orders_array)
 
 
 
