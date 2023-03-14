@@ -30,6 +30,7 @@ services:
     volumes:
       - /root/my_telebot/nginx/nginx.conf:/etc/nginx/nginx.conf
     restart: always
+    depends_on: backend
   backend:
     build: ./backend
     container_name: my_backend
@@ -40,3 +41,4 @@ services:
     volumes:
       - /root/my_telebot/tg_bot:/tg_bot
       - /root/my_telebot/tg_bot/.env:/tg_bot/.env
+    restart: always
