@@ -20,7 +20,7 @@ cursor = conn.cursor()
 app = Flask(__name__)
 
 @app.route('/orders', methods = ['GET'])
-def index(): 
+def orders(): 
 	if request.method == 'GET':
 		cursor.execute("SELECT * FROM orders")
 		rows = cursor.fetchall()
@@ -31,6 +31,21 @@ def index():
 			'data': results
 			}, ensure_ascii = False)
 		return Response(orders,content_type="application/json; charset=utf-8" )
+
+@app.route('/customers', methods = ['GET'])
+def customers(): 
+	if request.method == 'GET':
+		cursor.execute("SELECT * FROM customers")
+		rows = cursor.fetchall()
+		results = []
+		for row in rows:
+			results.append({'tg_id': row[0], 'name': row[1]})
+		customers = json.dumps({
+			'data': results
+			}, ensure_ascii = False)
+		return Response(customers,content_type="application/json; charset=utf-8" )
+
+
 
 if __name__ == '__main__':
 	app.run(debug=True)
