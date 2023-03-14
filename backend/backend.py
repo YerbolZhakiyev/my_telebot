@@ -17,6 +17,7 @@ conn = psycopg2.connect(dbname=DB_NAME,
 cursor = conn.cursor()
 
 app = Flask(__name__)
+app.config['JSON_AS_ASCII'] = False
 @app.route('/')
 def index():
 	cursor.execute("SELECT * FROM orders")
