@@ -2,15 +2,22 @@ import telebot
 from telebot import types
 import psycopg2
 import time
+from dotenv import load_dotenv, find_dotenv
+import os
+load_dotenv(find_dotenv(raise_error_if_not_found=True))
+TOKEN = os.getenv('TGTOKEN')
+DB_NAME = os.getenv('DATABASENAME')
+DB_USER = os.getenv('DATABASEUSER')
+DB_PASSWORD = os.getenv('DATABASEPASSWORD')
 #-------------------Connect to db
-conn = psycopg2.connect(dbname='tg_bot',
-                        user='erbol', 
-                        password='password',
+conn = psycopg2.connect(dbname='DB_NAME',
+                        user='DB_USER', 
+                        password='DB_PASSWORD',
                         host='db',
                         port='5432')
 cursor = conn.cursor()
 
-bot = telebot.TeleBot('5875110972:AAEPOJgUjDXJpX3IOxOFO0MlthWOg980UZg')        
+bot = telebot.TeleBot(TOKEN)        
 
 @bot.message_handler(commands=['start'])
 def start(message): 
