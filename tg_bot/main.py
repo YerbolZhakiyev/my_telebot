@@ -127,7 +127,7 @@ def format_order_row(row):
     return f"ID заказа: {row[0]}\nОписание: {row[1]}\nОткуда: {row[2]}\nКуда: {row[3]}\nВес: {row[4]}\nТелефон: {row[5]}"
 #-------------------------------------
 
-request1 = requests.get('http://backend/orders:8000')
+request1 = requests.get('http://backend:8000/orders')
 print(request1.json())
 
 
