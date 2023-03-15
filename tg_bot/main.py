@@ -55,34 +55,28 @@ def get_order_id():
 @bot.message_handler(commands=['create_order'])
 def create_order(message):
     id = get_order_id()
-    cursor.execute("INSERT INTO orders (id) VALUES (%s)", (id,))
-    conn.commit()
     bot.send_message(message.chat.id, 'Введите описание заказа. Опишите, что хотите отправить и количество товара (Например: Мешки сахара, 6 мешков; Коробки, 4 штуки; Телевизор и т.д.):')
     bot.register_next_step_handler(message, get_description, id)
 def get_description(message, id):
-    cursor.execute("UPDATE orders SET description = %s WHERE id = %s", (message.text, id))
-    conn.commit()
+    order = {"id": id, "description": message.text}
     bot.send_message(message.chat.id, 'Введите вес заказа (Например: 120 киллограммов; 40 литров и т.д.):')
-    bot.register_next_step_handler(message, get_weight, id)
-def get_weight(message, id):
-    cursor.execute("UPDATE orders SET weight = %s WHERE id = %s", (message.text, id))
-    conn.commit()
+    bot.register_next_step_handler(message, get_weight, order)
+def get_weight(message, order):
+    order["weight"] = message.text
     bot.send_message(message.chat.id, 'Введите адрес откуда необходимо забрать заказ:')
-    bot.register_next_step_handler(message, get_from, id)
-def get_from(message, id):
-    cursor.execute("UPDATE orders SET from_address = %s WHERE id = %s", (message.text, id))
-    conn.commit()
+    bot.register_next_step_handler(message, get_from, order)
+def get_from(message, order):
+    order["from_address"] = message.text
     bot.send_message(message.chat.id, 'Введите адрес куда необходимо доставить заказ:')
-    bot.register_next_step_handler(message, get_where, id)
-def get_where(message, id):
-    cursor.execute("UPDATE orders SET to_address = %s WHERE id = %s", (message.text, id))
-    conn.commit()
+    bot.register_next_step_handler(message, get_where, order)
+def get_where(message, order):
+    order["to_address"] = message.text
     bot.send_message(message.chat.id, 'Введите Номер телефона:')
-    bot.register_next_step_handler(message, get_phone, id)
-def get_phone(message, id):
+    bot.register_next_step_handler(message, get_phone, order)
+def get_phone(message, order):
     id_for_text = str(id)
-    cursor.execute("UPDATE orders SET phone = %s WHERE id = %s", (message.text, id))
-    conn.commit()         
+    order["phone"] = message.text
+    response = requests.post("http://backend:8000/create_order", json=order)      
     with open('/tg_bot/image2.jpeg', 'rb') as photo:
         bot.send_photo(message.chat.id, photo) 
     bot.send_message(message.chat.id, 'Заказ успешно создан! Номер вашего заказа: ' + id_for_text + ' Спасибо!')
