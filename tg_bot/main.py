@@ -30,7 +30,7 @@ def start(message):
     bot.send_message(message.chat.id, mess, parse_mode='html')
     bot.send_message(message.chat.id, "Для того, чтобы посмотреть все комманды введите " + f"<b>/</b>", parse_mode='html')
     bot.send_message(message.chat.id, "Для того, чтобы сделать заказ введите " + f"<b>/create_order</b>", parse_mode='html')
-    bot.send_message(message.chat.id, "Для того, чтобы сделать заказ введите " + f"<b>/all_orders</b>", parse_mode='html')
+    bot.send_message(message.chat.id, "Для того, чтобы посмотреть все заказы " + f"<b>/all_orders</b>", parse_mode='html')
     bot.send_message(message.chat.id, "Спасибо, что используете этого бота.", parse_mode='html')
     name_of_customer = str(message.from_user.first_name)
     id_of_customer = message.from_user.id
@@ -92,16 +92,18 @@ def get_phone(message, id):
         bot.send_photo(message.chat.id, photo) 
     bot.send_message(message.chat.id, 'Заказ успешно создан! Номер вашего заказа: ' + id_for_text + ' Спасибо!')
 #-------------------------------------
-row_num = 0
+
 dict_num = 0
 @bot.message_handler(commands=['all_orders'])
 def send_orders(message):
     request1 = requests.get('http://backend:8000/orders')
     json_body = request1.json()
+    my_array_for_sum = json_obj["data"]
+    json_obj = json.loads(request1)
     orders_array = json_body['data']
     chat_id = message.chat.id
     dicti = orders_array[dict_num]
-    num_rows = len(orders_array) 
+    num_dicts = len(my_array_for_sum) 
     bot.send_message(chat_id, f"ID заказа: {dicti['id']}\nОписание: {dicti['description']}\nОткуда: {dicti['from_address']}\nКуда: {dicti['to_address']}\nВес: {dicti['weight']}\nТелефон: {dicti['phone']}")
     markup = telebot.types.ReplyKeyboardMarkup(row_width=2)
     previous_button = telebot.types.KeyboardButton('Предыдущий заказ')
@@ -111,27 +113,19 @@ def send_orders(message):
     
     @bot.message_handler(func=lambda message: message.text == 'Предыдущий заказ')
     def handle_previous_order(message):
-        global row_num
         global dict_num
         dict_num -= 1
         if dict_num < 0:
-            dict_num = num_rows - 1
-        row_num -= 1
-        if row_num < 0:
-            row_num = num_rows - 1
+            dict_num = num_dicts - 1
         bot.send_message(chat_id, f"ID заказа: {dicti['id']}\nОписание: {dicti['description']}\nОткуда: {dicti['from_address']}\nКуда: {dicti['to_address']}\nВес: {dicti['weight']}\nТелефон: {dicti['phone']}", reply_markup=markup)
         return handle_previous_order
     
     @bot.message_handler(func=lambda message: message.text == 'Следующий заказ')
     def handle_next_order(message):
-        global row_num
         global dict_num
         dict_num += 1
-        if dict_num >= num_rows:
+        if dict_num >= num_dicts:
             dict_num = 0
-        row_num += 1
-        if row_num >= num_rows:
-            row_num = 0
         bot.send_message(chat_id, f"ID заказа: {dicti['id']}\nОписание: {dicti['description']}\nОткуда: {dicti['from_address']}\nКуда: {dicti['to_address']}\nВес: {dicti['weight']}\nТелефон: {dicti['phone']}", reply_markup=markup)
         return handle_next_order
 #-------------------------------------
