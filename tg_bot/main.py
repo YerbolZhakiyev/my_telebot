@@ -132,11 +132,11 @@ json_body = request1.json()
 orders_array = json_body['data']
 order_num = orders_array[0]
 print("Информация о заказе:")
-print("ID заказа:", first_order['id'])
-print("Описание:", first_order['description'])
-print("Адрес отправления:", first_order['from_address'])
-print("Адрес доставки:", first_order['to_address'])
-print("Вес:", first_order['weight'])
-print("Телефон:", first_order['phone'])
+print("ID заказа:", order_num['id'])
+print("Описание:", order_num['description'])
+print("Адрес отправления:", order_num['from_address'])
+print("Адрес доставки:", order_num['to_address'])
+print("Вес:", order_num['weight'])
+print("Телефон:", order_num['phone'])
 
 bot.polling(non_stop=True)        
