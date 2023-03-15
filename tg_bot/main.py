@@ -96,11 +96,13 @@ def get_phone(message, id):
 dict_num = 0
 @bot.message_handler(commands=['all_orders'])
 def send_orders(message):
-    request1 = requests.get('http://backend:8000/orders')
-    json_string = request1.json()
-    orders_array = json_string['data']
-    my_array = json_string["my_array"]
-    num_dicts = len(my_array)
+    chat_id = message.chat.id
+    response = requests.get('http://backend:8000/orders')
+    json_obj = response.json()
+    data = json.loads(response.content)
+    array_of_dicts = data['data']
+    orders_array = json_obj['data']
+    num_dicts = len(array_of_dicts)
     chat_id = message.chat.id
     dicti = orders_array[dict_num]
     bot.send_message(chat_id, f"ID заказа: {dicti['id']}\nОписание: {dicti['description']}\nОткуда: {dicti['from_address']}\nКуда: {dicti['to_address']}\nВес: {dicti['weight']}\nТелефон: {dicti['phone']}")
