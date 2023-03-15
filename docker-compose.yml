@@ -22,6 +22,8 @@ services:
       POSTGRES_DB: tg_bot
     volumes:
       - /var/lib/postgresql/data:/var/lib/postgresql/data
+    ports: # open port only if pg admin is needed
+      - "5433:5432"
   nginx:
     image: nginx
     user: root
@@ -42,4 +44,4 @@ services:
     volumes:
       - /root/my_telebot/tg_bot:/tg_bot
       - /root/my_telebot/tg_bot/.env:/tg_bot/.env
-#    restart: always
+    restart: always
