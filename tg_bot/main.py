@@ -60,19 +60,19 @@ def create_order(message):
 def get_description(message, id):
     order = {"id": id, "description": message.text}
     bot.send_message(message.chat.id, 'Введите вес заказа (Например: 120 киллограммов; 40 литров и т.д.):')
-    bot.register_next_step_handler(message, get_weight, order)
-def get_weight(message, order):
+    bot.register_next_step_handler(message, get_weight, order, id)
+def get_weight(message, order, id):
     order["weight"] = message.text
     bot.send_message(message.chat.id, 'Введите адрес откуда необходимо забрать заказ:')
-    bot.register_next_step_handler(message, get_from, order)
-def get_from(message, order):
+    bot.register_next_step_handler(message, get_from, order, id)
+def get_from(message, order, id):
     order["from_address"] = message.text
     bot.send_message(message.chat.id, 'Введите адрес куда необходимо доставить заказ:')
-    bot.register_next_step_handler(message, get_where, order)
-def get_where(message, order):
+    bot.register_next_step_handler(message, get_where, order, id)
+def get_where(message, order, id):
     order["to_address"] = message.text
     bot.send_message(message.chat.id, 'Введите Номер телефона:')
-    bot.register_next_step_handler(message, get_phone, order)
+    bot.register_next_step_handler(message, get_phone, order, id)
 def get_phone(message, order, id):
     id_for_text = str(id)
     order["phone"] = message.text
