@@ -61,7 +61,7 @@ def new_customer():
 def create_order():
 	if request.method == 'POST':
 			request_data = request.get_json()
-			id = request_data('id')
+			id = request_data['id']
 			description = request_data['description']
 			weight = request_data['weight']
 			from_address = request_data['from_address']
