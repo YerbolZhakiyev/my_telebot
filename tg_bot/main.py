@@ -100,14 +100,17 @@ def send_orders(message):
     response = requests.get('http://backend:8000/orders')
     json_obj = response.json()
     orders_array = json_obj['data']
-    dicti = orders_array[dict_num]
     num_dicts = len(orders_array)
-    bot.send_message(chat_id, f"ID заказа: {dicti['id']}\nОписание: {dicti['description']}\nОткуда: {dicti['from_address']}\nКуда: {dicti['to_address']}\nВес: {dicti['weight']}\nТелефон: {dicti['phone']}")
-    markup = telebot.types.ReplyKeyboardMarkup(row_width=2)
-    previous_button = telebot.types.KeyboardButton('Предыдущий заказ')
-    next_button = telebot.types.KeyboardButton('Следующий заказ')
-    markup.add(previous_button, next_button)
-    bot.send_message(chat_id, "Выберите действие:", reply_markup=markup)
+    
+    def send_order_message(chat_id, dicti):
+        markup = telebot.types.ReplyKeyboardMarkup(row_width=2)
+        previous_button = telebot.types.KeyboardButton('Предыдущий заказ')
+        next_button = telebot.types.KeyboardButton('Следующий заказ')
+        markup.add(previous_button, next_button)
+        bot.send_message(chat_id, f"ID заказа: {dicti['id']}\nОписание: {dicti['description']}\nОткуда: {dicti['from_address']}\nКуда: {dicti['to_address']}\nВес: {dicti['weight']}\nТелефон: {dicti['phone']}", reply_markup=markup)
+
+    dicti = orders_array[dict_num]
+    send_order_message(chat_id, dicti)
     
     @bot.message_handler(func=lambda message: message.text == 'Предыдущий заказ')
     def handle_previous_order(message):
@@ -115,9 +118,8 @@ def send_orders(message):
         dict_num -= 1
         if dict_num < 0:
             dict_num = num_dicts - 1
-        print(num_dicts)
-        bot.send_message(chat_id, f"ID заказа: {dicti['id']}\nОписание: {dicti['description']}\nОткуда: {dicti['from_address']}\nКуда: {dicti['to_address']}\nВес: {dicti['weight']}\nТелефон: {dicti['phone']}", reply_markup=markup)
-        return handle_previous_order
+        dicti = orders_array[dict_num]
+        send_order_message(chat_id, dicti)
     
     @bot.message_handler(func=lambda message: message.text == 'Следующий заказ')
     def handle_next_order(message):
@@ -125,9 +127,8 @@ def send_orders(message):
         dict_num += 1
         if dict_num >= num_dicts:
             dict_num = 0
-        print(num_dicts)
-        bot.send_message(chat_id, f"ID заказа: {dicti['id']}\nОписание: {dicti['description']}\nОткуда: {dicti['from_address']}\nКуда: {dicti['to_address']}\nВес: {dicti['weight']}\nТелефон: {dicti['phone']}", reply_markup=markup)
-        return handle_next_order
+        dicti = orders_array[dict_num]
+        send_order_message(chat_id, dicti)
 #-------------------------------------
 
 bot.polling(non_stop=True)        
