@@ -131,5 +131,5 @@ request1 = requests.get('http://backend:8000/orders')
 json_body = request1.json()
 orders_array = json_body['data']
 for order in orders_array:
-    print(order)
+    print("Описание заказа:", order['description'])
 bot.polling(non_stop=True)        
