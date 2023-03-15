@@ -35,7 +35,8 @@ def start(message):
     name_of_customer = str(message.from_user.first_name)
     id_of_customer = message.from_user.id
     json_data = json.dumps({'name': name_of_customer, 'tg_id': id_of_customer})
-    response = requests.post('http://backend:8000/new_customer', json=json_data)
+    headers = {'Content-Type': 'application/json'}
+    response = requests.post('http://backend:8000/new_customer', data=json_data, headers=headers)
 
 @bot.message_handler(commands=['insta'])
 def insta(msg):
