@@ -99,9 +99,10 @@ def send_orders(message):
     request1 = requests.get('http://backend:8000/orders')
     json_string = request1.json()
     orders_array = json_string['data']
+    my_array = json_string["my_array"]
+    num_dicts = len(my_array)
     chat_id = message.chat.id
     dicti = orders_array[dict_num]
-    num_dicts = len(orders_array) 
     bot.send_message(chat_id, f"ID заказа: {dicti['id']}\nОписание: {dicti['description']}\nОткуда: {dicti['from_address']}\nКуда: {dicti['to_address']}\nВес: {dicti['weight']}\nТелефон: {dicti['phone']}")
     markup = telebot.types.ReplyKeyboardMarkup(row_width=2)
     previous_button = telebot.types.KeyboardButton('Предыдущий заказ')
