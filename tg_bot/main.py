@@ -98,8 +98,8 @@ dict_num = 0
 def send_orders(message):
     request1 = requests.get('http://backend:8000/orders')
     json_body = request1.json()
-    my_array_for_sum = json_obj["data"]
     json_obj = json.loads(request1)
+    my_array_for_sum = json_obj["data"]
     orders_array = json_body['data']
     chat_id = message.chat.id
     dicti = orders_array[dict_num]
