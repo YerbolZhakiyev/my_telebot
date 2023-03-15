@@ -31,8 +31,19 @@ def orders():
 			'data': results
 			}, ensure_ascii = False)
 		return Response(orders,content_type="application/json; charset=utf-8" )
+	elif request.method == 'POST':
+		request_data = request.get_json()
+		id = request_data['id']
+		description = request_data['description']
+		weight = request_data['weight']
+		from_address = request_data['from_address']
+		to_address = request_data['to_address']
+		phone = request_data['phone']
+		cursor.execute("INSERT INTO orders (id, description, weight, from_address, to_address, phone) VALUES (%s, %s, %s, %s, %s, %s)", (id, description, weight, from_address, to_address, phone))
+		conn.commit()
 
-@app.route('/customers', methods = ['GET'])
+
+@app.route('/customers', methods = ['GET', 'POST'])
 def customers(): 
 	if request.method == 'GET':
 		cursor.execute("SELECT * FROM customers")
@@ -44,10 +55,7 @@ def customers():
 			'data': results
 			}, ensure_ascii = False)
 		return Response(customers,content_type="application/json; charset=utf-8" )
-
-@app.route('/new_customer', methods = ['POST'])
-def new_customer():
-	if request.method == 'POST':
+	elif request.method == 'POST':
 		content = request.json
 		name = content['name']
 		tg_id = content['tg_id']
@@ -56,20 +64,6 @@ def new_customer():
 		if result is None:
 			cursor.execute("INSERT INTO customers (name, tg_id) VALUES (%s, %s)", [name, tg_id])
 			conn.commit()
-
-@app.route('/create_order', methods = ['POST'])
-def create_order():
-	if request.method == 'POST':
-			request_data = request.get_json()
-			id = request_data['id']
-			description = request_data['description']
-			weight = request_data['weight']
-			from_address = request_data['from_address']
-			to_address = request_data['to_address']
-			phone = request_data['phone']
-			cursor.execute("INSERT INTO orders (id, description, weight, from_address, to_address, phone) VALUES (%s, %s, %s, %s, %s, %s)", (id, description, weight, from_address, to_address, phone))
-			conn.commit()
-
 
 if __name__ == '__main__':
 	app.run(debug=True)

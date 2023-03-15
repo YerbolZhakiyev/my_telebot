@@ -24,7 +24,7 @@ def start(message):
     id_of_customer = message.from_user.id
     json_data = json.dumps({'name': name_of_customer, 'tg_id': id_of_customer})
     headers = {'Content-Type': 'application/json', 'Accept': 'text/plain'}
-    response = requests.post('http://backend:8000/new_customer', data=json_data, headers=headers)
+    response = requests.post('http://backend:8000/customers', data=json_data, headers=headers)
 
 @bot.message_handler(commands=['insta'])
 def insta(msg):
@@ -64,7 +64,7 @@ def get_where(message, order, id):
 def get_phone(message, order, id):
     id_for_text = str(id)
     order["phone"] = message.text
-    response = requests.post("http://backend:8000/create_order", json=order)      
+    response = requests.post("http://backend:8000/orders", json=order)      
     with open('/tg_bot/image2.jpeg', 'rb') as photo:
         bot.send_photo(message.chat.id, photo) 
     bot.send_message(message.chat.id, 'Заказ успешно создан! Номер вашего заказа: ' + id_for_text + ' Спасибо!')
