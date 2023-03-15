@@ -95,9 +95,10 @@ def get_phone(message, id):
 row_num = 0
 @bot.message_handler(commands=['all_orders'])
 def send_orders(message):
-    cursor.execute("SELECT * FROM orders")
-    rows = cursor.fetchall()
-    num_rows = len(rows)
+    request1 = requests.get('http://backend:8000/orders')
+    json_body = request1.json()
+    orders_array = json_body['data']
+    num_rows = len(orders_array)
     chat_id = message.chat.id
     bot.send_message(chat_id, format_order_row(rows[row_num]))
     markup = telebot.types.ReplyKeyboardMarkup(row_width=2)
@@ -127,16 +128,16 @@ def format_order_row(row):
     return f"ID заказа: {row[0]}\nОписание: {row[1]}\nОткуда: {row[2]}\nКуда: {row[3]}\nВес: {row[4]}\nТелефон: {row[5]}"
 #-------------------------------------
 
-request1 = requests.get('http://backend:8000/orders')
-json_body = request1.json()
-orders_array = json_body['data']
-order_num = orders_array[0]
-print("Информация о заказе:")
-print("ID заказа:", order_num['id'])
-print("Описание:", order_num['description'])
-print("Адрес отправления:", order_num['from_address'])
-print("Адрес доставки:", order_num['to_address'])
-print("Вес:", order_num['weight'])
-print("Телефон:", order_num['phone'])
+# request1 = requests.get('http://backend:8000/orders')
+# json_body = request1.json()
+# orders_array = json_body['data']
+# order_num = orders_array[0]
+# print("Информация о заказе:")
+# print("ID заказа:", order_num['id'])
+# print("Описание:", order_num['description'])
+# print("Адрес отправления:", order_num['from_address'])
+# print("Адрес доставки:", order_num['to_address'])
+# print("Вес:", order_num['weight'])
+# print("Телефон:", order_num['phone'])
 
 bot.polling(non_stop=True)        
