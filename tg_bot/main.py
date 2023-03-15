@@ -130,6 +130,13 @@ def format_order_row(row):
 request1 = requests.get('http://backend:8000/orders')
 json_body = request1.json()
 orders_array = json_body['data']
-for order in orders_array:
-    print("Описание заказа:", order['description'])
+order_num = order_list[0]
+print("Информация о заказе:")
+print("ID заказа:", first_order['id'])
+print("Описание:", first_order['description'])
+print("Адрес отправления:", first_order['from_address'])
+print("Адрес доставки:", first_order['to_address'])
+print("Вес:", first_order['weight'])
+print("Телефон:", first_order['phone'])
+
 bot.polling(non_stop=True)        
