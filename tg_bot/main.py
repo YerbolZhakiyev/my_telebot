@@ -102,7 +102,7 @@ def send_orders(message):
     chat_id = message.chat.id
     dicti = orders_array[dict_num]
     num_rows = len(orders_array) 
-    bot.send_message(chat_id, format_order_row(dicti[row_num]))
+    bot.send_message(chat_id, f"ID заказа: {dicti['id']}\nОписание: {dicti['description']}\nОткуда: {dicti['from_address']}\nКуда: {dicti['to_address']}\nВес: {row['weight']}\nТелефон: {row['phone']}")
     markup = telebot.types.ReplyKeyboardMarkup(row_width=2)
     previous_button = telebot.types.KeyboardButton('Предыдущий заказ')
     next_button = telebot.types.KeyboardButton('Следующий заказ')
