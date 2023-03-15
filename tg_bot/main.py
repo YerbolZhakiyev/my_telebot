@@ -73,7 +73,7 @@ def get_where(message, order):
     order["to_address"] = message.text
     bot.send_message(message.chat.id, 'Введите Номер телефона:')
     bot.register_next_step_handler(message, get_phone, order)
-def get_phone(message, order):
+def get_phone(message, order, id):
     id_for_text = str(id)
     order["phone"] = message.text
     response = requests.post("http://backend:8000/create_order", json=order)      

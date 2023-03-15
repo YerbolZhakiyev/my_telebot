@@ -67,7 +67,7 @@ def create_order():
 			from_address = request_data['from_address']
 			to_address = request_data['to_address']
 			phone = request_data['phone']
-			cursor.execute("INSERT INTO orders (id, description, weight, from_address, to_address, phone) VALUES (%s, %s, %s, %s, %s, %s)", (order_id, description, weight, from_address, to_address, phone))
+			cursor.execute("INSERT INTO orders (id, description, weight, from_address, to_address, phone) VALUES (%s, %s, %s, %s, %s, %s)", (id, description, weight, from_address, to_address, phone))
 			conn.commit()
 
 
