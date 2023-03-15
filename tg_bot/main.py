@@ -130,7 +130,7 @@ def format_order_row(row):
 request1 = requests.get('http://backend:8000/orders')
 json_body = request1.json()
 orders_array = json_body['data']
-order_num = order_list[0]
+order_num = orders_array[0]
 print("Информация о заказе:")
 print("ID заказа:", first_order['id'])
 print("Описание:", first_order['description'])
