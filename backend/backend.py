@@ -45,7 +45,14 @@ def customers():
 			}, ensure_ascii = False)
 		return Response(customers,content_type="application/json; charset=utf-8" )
 
-
+@app.route('/new_customer', methods = ['POST'])
+def new_customer():
+	if request.method == 'POST':
+		cursor.execute("SELECT * FROM customers WHERE tg_id=%s", (tg_id,))
+		result = cursor.fetchone()
+		if result is None:
+			cursor.execute("INSERT INTO customers (name, tg_id) VALUES (%s, %s)", (name_of_customer, id_of_customer))
+		conn.commit()
 
 if __name__ == '__main__':
 	app.run(debug=True)

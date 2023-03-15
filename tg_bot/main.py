@@ -34,15 +34,9 @@ def start(message):
     bot.send_message(message.chat.id, "Спасибо, что используете этого бота.", parse_mode='html')
     name_of_customer = str(message.from_user.first_name)
     id_of_customer = message.from_user.id
-#-------------------Check for new customer and adding him if does not exist
-    sql_query_to_check_primary_key = "SELECT * FROM customers WHERE tg_id = %s"
-    cursor.execute(sql_query_to_check_primary_key, (id_of_customer,))
-    result = cursor.fetchone()
-    if result is None:
-#-------------------------------------
-        cursor.execute("INSERT INTO customers (name, tg_id) VALUES (%s, %s)", (name_of_customer, id_of_customer))
-        conn.commit()
-#-------------------------------------
+    json_data = json.dumps({'name': name_of_customer, 'tg_id': id_of_customer})
+    response = requests.post('http://backend:8000/new_customer', json=json_data)
+
 @bot.message_handler(commands=['insta'])
 def insta(msg):
     markup = types.InlineKeyboardMarkup()
