@@ -52,7 +52,7 @@ def new_customer():
 		result = cursor.fetchone()
 		if result is None:
 			cursor.execute("INSERT INTO customers (name, tg_id) VALUES (%s, %s)", (name_of_customer, id_of_customer))
-		conn.commit()
+			conn.commit()
 
 if __name__ == '__main__':
 	app.run(debug=True)
