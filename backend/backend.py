@@ -39,7 +39,7 @@ def customers():
 		rows = cursor.fetchall()
 		results = []
 		for row in rows:
-			results.append({'tg_id': row[0], 'name': row[1]})
+			results.append({'name': row[0], 'tg_id': row[1]})
 		customers = json.dumps({
 			'data': results
 			}, ensure_ascii = False)
@@ -48,10 +48,13 @@ def customers():
 @app.route('/new_customer', methods = ['POST'])
 def new_customer():
 	if request.method == 'POST':
-		cursor.execute("SELECT * FROM customers WHERE tg_id=%s", (tg_id,))
+		content = request.json
+		name = content['name']
+		tg_id = content['tg_id']
+		cursor.execute("SELECT * FROM customers WHERE tg_id=%s", [tg_id])
 		result = cursor.fetchone()
 		if result is None:
-			cursor.execute("INSERT INTO customers (name, tg_id) VALUES (%s, %s)", (name_of_customer, id_of_customer))
+			cursor.execute("INSERT INTO customers (name, tg_id) VALUES (%s, %s)", [name, tg_id])
 			conn.commit()
 
 if __name__ == '__main__':
