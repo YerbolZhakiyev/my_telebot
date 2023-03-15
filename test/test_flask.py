@@ -6,9 +6,8 @@ import sys
 dotenv_path = find_dotenv()
 load_dotenv(dotenv_path)
 BACKEND_HOST = os.getenv('backend_host')
-response = requests.get('http://' + BACKEND_HOST + ':8000/orders')
+response = requests.get('http://' + BACKEND_HOST + ':8000/orderss')
 if response.status_code == 200:
     print('Flask is working without any issues')
 else:
-    print('There are some troubles with backend')
     sys.exit()
