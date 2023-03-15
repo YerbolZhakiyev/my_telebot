@@ -97,10 +97,10 @@ dict_num = 0
 @bot.message_handler(commands=['all_orders'])
 def send_orders(message):
     request1 = requests.get('http://backend:8000/orders')
-    json_body = request1.json()
-    json_obj = json.loads(json_body)
+    json_string = request1.json()
+    json_obj = json.loads(json_string)
     my_array_for_sum = json_obj["data"]
-    orders_array = json_body['data']
+    orders_array = json_string['data']
     chat_id = message.chat.id
     dicti = orders_array[dict_num]
     num_dicts = len(my_array_for_sum) 
