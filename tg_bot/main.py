@@ -5,12 +5,12 @@ from dotenv import load_dotenv, find_dotenv
 import os
 import requests
 import json
-
+#-------------------------------------
 dotenv_path = find_dotenv()
 load_dotenv(dotenv_path)
 TOKEN = os.getenv('TGTOKEN')
 bot = telebot.TeleBot(TOKEN)        
-
+#-------------------------------------
 @bot.message_handler(commands=['start'])
 def start(message): 
     mess = f'Добро пожаловать, <b>{message.from_user.first_name}</b>!'
@@ -24,7 +24,7 @@ def start(message):
     json_data = json.dumps({'name': name_of_customer, 'tg_id': id_of_customer})
     headers = {'Content-Type': 'application/json', 'Accept': 'text/plain'}
     response = requests.post('http://backend:8000/customers', data=json_data, headers=headers)
-
+#-------------------------------------
 @bot.message_handler(commands=['insta'])
 def insta(msg):
     markup = types.InlineKeyboardMarkup()
