@@ -93,14 +93,16 @@ def get_phone(message, id):
     bot.send_message(message.chat.id, 'Заказ успешно создан! Номер вашего заказа: ' + id_for_text + ' Спасибо!')
 #-------------------------------------
 row_num = 0
+dict_num = 0
 @bot.message_handler(commands=['all_orders'])
 def send_orders(message):
     request1 = requests.get('http://backend:8000/orders')
     json_body = request1.json()
     orders_array = json_body['data']
-    num_rows = len(orders_array)
     chat_id = message.chat.id
-    bot.send_message(chat_id, format_order_row(orders_array[row_num]))
+    dicti = orders_array[dict_num]
+    num_rows = len(orders_array) 
+    bot.send_message(chat_id, format_order_row(dicti[row_num]))
     markup = telebot.types.ReplyKeyboardMarkup(row_width=2)
     previous_button = telebot.types.KeyboardButton('Предыдущий заказ')
     next_button = telebot.types.KeyboardButton('Следующий заказ')
@@ -110,19 +112,26 @@ def send_orders(message):
     @bot.message_handler(func=lambda message: message.text == 'Предыдущий заказ')
     def handle_previous_order(message):
         global row_num
+        global dict_num
+        dict_num -= 1
+        if dict_num < 0:
+            dict_num = num_rows - 1
         row_num -= 1
         if row_num < 0:
             row_num = num_rows - 1
-        bot.send_message(chat_id, format_order_row(orders_array[row_num]), reply_markup=markup)
+        bot.send_message(chat_id, format_order_row(dicti[row_num]), reply_markup=markup)
         return handle_previous_order
     
     @bot.message_handler(func=lambda message: message.text == 'Следующий заказ')
     def handle_next_order(message):
         global row_num
+        dict_num += 1
+        if dict_num >= num_rows:
+            dict_num = 0
         row_num += 1
         if row_num >= num_rows:
             row_num = 0
-        bot.send_message(chat_id, format_order_row(orders_array[row_num]), reply_markup=markup)
+        bot.send_message(chat_id, format_order_row(dicti[row_num]), reply_markup=markup)
         return handle_next_order
 def format_order_row(row):
     return f"ID заказа: {row[0]}\nОписание: {row[1]}\nОткуда: {row[2]}\nКуда: {row[3]}\nВес: {row[4]}\nТелефон: {row[5]}"
