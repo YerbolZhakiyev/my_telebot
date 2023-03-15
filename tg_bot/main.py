@@ -129,7 +129,7 @@ def format_order_row(row):
 
 request1 = requests.get('http://backend:8000/orders')
 json_body = request1.json()
-first_order_id = json_body[0]['data']
-print(first_order_id)
-
+orders_array = json_body['data']
+for order in orders_array:
+    print(order)
 bot.polling(non_stop=True)        
