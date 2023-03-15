@@ -115,6 +115,7 @@ def send_orders(message):
         dict_num -= 1
         if dict_num < 0:
             dict_num = num_dicts - 1
+        print(num_dicts)
         bot.send_message(chat_id, f"ID заказа: {dicti['id']}\nОписание: {dicti['description']}\nОткуда: {dicti['from_address']}\nКуда: {dicti['to_address']}\nВес: {dicti['weight']}\nТелефон: {dicti['phone']}", reply_markup=markup)
         return handle_previous_order
     
@@ -124,6 +125,7 @@ def send_orders(message):
         dict_num += 1
         if dict_num >= num_dicts:
             dict_num = 0
+        print(num_dicts)
         bot.send_message(chat_id, f"ID заказа: {dicti['id']}\nОписание: {dicti['description']}\nОткуда: {dicti['from_address']}\nКуда: {dicti['to_address']}\nВес: {dicti['weight']}\nТелефон: {dicti['phone']}", reply_markup=markup)
         return handle_next_order
 #-------------------------------------
