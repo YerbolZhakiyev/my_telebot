@@ -6,7 +6,6 @@ import os
 import requests
 import json
 
-
 dotenv_path = find_dotenv()
 load_dotenv(dotenv_path)
 TOKEN = os.getenv('TGTOKEN')
