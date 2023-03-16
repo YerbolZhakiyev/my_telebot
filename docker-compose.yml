@@ -30,6 +30,7 @@ services:
       - "80:80"
     volumes:
       - /root/my_telebot/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /root/my_telebot/html:/html
     restart: always
     depends_on: 
       - backend
