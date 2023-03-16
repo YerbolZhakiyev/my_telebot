@@ -21,8 +21,8 @@ services:
       POSTGRES_DB: tg_bot
     volumes:
       - /var/lib/postgresql/data:/var/lib/postgresql/data
-    # ports: #----------- open port only if pg admin is needed, and then close it
-    #   - "5433:5432"
+    #ports: #----------- open port only if pg admin is needed, and then close it
+    #  - "5433:5432"
   nginx:
     image: nginx
     user: root
