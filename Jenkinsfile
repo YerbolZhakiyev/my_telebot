@@ -11,6 +11,15 @@ pipeline {
                 echo '---------------------------------------------'
             }
         }
+        stage('Deploy nginx') {
+            steps {
+                echo 'Starting nginx deployment.....'
+                echo '---------------------------------------------'
+                sh 'ssh root@64.227.127.179 -t "cd /root/my_telebot; docker-compose stop nginx; docker-compose up -d nginx"'
+                echo '------------------Success--------------------'
+                echo '---------------------------------------------'
+            }
+        }
         stage('Testing backend') {
             steps {
                 echo 'Starting test.....'
