@@ -23,7 +23,7 @@ def start(message):
     id_of_customer = message.from_user.id
     json_data = json.dumps({'name': name_of_customer, 'tg_id': id_of_customer})
     headers = {'Content-Type': 'application/json', 'Accept': 'text/plain'}
-    response = requests.post('http://backend:8000/customers', data=json_data, headers=headers)
+    response = requests.post('http://backend:8000/api/customers', data=json_data, headers=headers)
 #-------------------------------------
 @bot.message_handler(commands=['insta'])
 def insta(msg):
@@ -63,7 +63,7 @@ def get_where(message, order, id):
 def get_phone(message, order, id):
     id_for_text = str(id)
     order["phone"] = message.text
-    response = requests.post("http://backend:8000/orders", json=order)      
+    response = requests.post("http://backend:8000/api/orders", json=order)      
     with open('/tg_bot/image2.jpeg', 'rb') as photo:
         bot.send_photo(message.chat.id, photo) 
     bot.send_message(message.chat.id, 'Заказ успешно создан! Номер вашего заказа: ' + id_for_text + ' Спасибо!')
@@ -73,7 +73,7 @@ dict_num = 0
 @bot.message_handler(commands=['all_orders'])
 def send_orders(message):
     chat_id = message.chat.id
-    response = requests.get('http://backend:8000/orders')
+    response = requests.get('http://backend:8000/api/orders')
     json_obj = response.json()
     orders_array = json_obj['data']
     num_dicts = len(orders_array)
