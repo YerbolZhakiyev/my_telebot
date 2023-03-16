@@ -19,7 +19,7 @@ cursor = conn.cursor()
 
 app = Flask(__name__)
 
-@app.route('api/orders', methods = ['GET'])
+@app.route('/api/orders', methods = ['GET'])
 def orders(): 
 	if request.method == 'GET':
 		cursor.execute("SELECT * FROM orders")
@@ -43,7 +43,7 @@ def orders():
 		conn.commit()
 
 
-@app.route('api/customers', methods = ['GET', 'POST'])
+@app.route('/api/customers', methods = ['GET', 'POST'])
 def customers(): 
 	if request.method == 'GET':
 		cursor.execute("SELECT * FROM customers")
