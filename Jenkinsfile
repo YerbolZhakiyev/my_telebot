@@ -24,7 +24,7 @@ pipeline {
             steps {
                 echo 'Starting test.....'
                 echo '---------------------------------------------'
-                sh 'ssh root@HOST_ADDRESS -t "python3 /root/my_telebot/test/test_flask.py"'
+                sh 'ssh root@$HOST_ADDRESS -t "python3 /root/my_telebot/test/test_flask.py"'
                 echo '------------------Success--------------------'
                 echo '---------------------------------------------'
             }
