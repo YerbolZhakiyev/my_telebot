@@ -10,7 +10,7 @@
   <script>
 
     function createTable(data) {
-      condole.log(Object.keys(data[0]))
+      console.log(Object.keys(data[0]))
       let table = document.getElementById("table")
       let tableRow = document.createElement('tr');
       for ( let tableHeader in Object.keys(data[0])) {
