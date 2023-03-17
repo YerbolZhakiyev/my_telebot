@@ -15,6 +15,7 @@
       let tableRow = document.createElement('tr');
       for ( let tableHeader in Object.keys(data[0])) {
         let tableRowHeader = document.createElement('th');
+        console.log(tableHeader)
         tableRowHeader.textContent = tableHeader;
         tableRow.appendChild(tableRowHeader)
       }
