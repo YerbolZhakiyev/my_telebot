@@ -10,6 +10,7 @@
   <script>
 
     function createTable(data) {
+      condole.log(Object.keys(data[0]))
       let table = document.getElementById("table")
       let tableRow = document.createElement('tr');
       for ( let tableHeader in Object.keys(data[0])) {
@@ -24,6 +25,7 @@
       fetch('/api/orders')
       .then( response => response.json())
       .then( jsonObj => createTable(jsonObj.data))
+      .catch( error => console.error(error.message))
     }
   </script>
 </body>
