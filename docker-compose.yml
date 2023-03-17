@@ -1,4 +1,7 @@
 version: '3'
+networks:
+  loki:
+
 services:
   jenkins:
     image: jenkins/jenkins
@@ -52,6 +55,8 @@ services:
       - /root/my_telebot/promtail:/etc/promtail
     restart: unless-stopped
     command: -config.file=/etc/promtail/promtail-config.yml
+    networks:
+      - loki
   loki:
     image: grafana/loki
     volumes:
@@ -60,6 +65,8 @@ services:
       - "3100:3100"
     restart: unless-stopped
     command: -config.file=/etc/loki/loki-config.yml
+    networks:
+      - loki
   grafana:
     image: grafana/grafana
     user: root
@@ -68,3 +75,5 @@ services:
     ports:
       - "3000:3000"
     restart: unless-stopped 
+    networks:
+      - loki
