@@ -45,14 +45,6 @@ services:
       - /root/my_telebot/tg_bot:/tg_bot
       - /root/my_telebot/tg_bot/.env:/tg_bot/.env
     restart: always
-  loki:
-    image: grafana/loki
-    volumes:
-      - /root/my_telebot/loki:/etc/loki
-    ports: 
-      - "3100:3100"
-    restart: unless-stopped
-    command: -config.file=/etc/loki/loki-config.yml
   promtail:
     image: grafana/promtail
     volumes:
@@ -60,6 +52,13 @@ services:
       - /root/my_telebot/promtail:/etc/promtail
     restart: unless-stopped
     command: -config.file=/etc/promtail/promtail-config.yml
+  loki:
+    image: grafana/loki
+    volumes:
+      - /root/my_telebot/loki:/etc/loki
+    ports: 
+      - "3100:3100"
+    restart: unless-stopped
   grafana:
     image: grafana/grafana
     user: root
