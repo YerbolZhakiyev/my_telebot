@@ -21,7 +21,7 @@
     }
 
     window.onload = event => {
-      fetch('http://64.227.127.179:80/api/orders')
+      fetch('/api/orders')
       .then( response => response.json())
       .then( jsonObj => createTable(jsonObj.data))
     }
