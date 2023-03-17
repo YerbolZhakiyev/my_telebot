@@ -5,17 +5,19 @@
 <title>Таблица заказов</title>
 </head>
 <body>
-<h1>Таблица заказов</h1>
-<p>Здесь вы можете посмотреть все заказы</p>
-<table border="4" bordercolor="#000000">
-  <tr>
-    <th>Номер заказа</th>
-    <th>Описание</th>
-    <th>Вес</th>
-    <th>Откуда забрать</th>
-    <th>Куда доставить</th>
-    <th>Номер телефона</th>
-  </tr>
-</table>
+  <h1>Таблица заказов</h1>
+  <div id = "table"></div>
+  <script>
+
+    function createTable(data) {
+      console.log(data)
+    }
+
+    window.onload = event => {
+      fetch('/api/orders')
+      .then( response => response.json())
+      .then( jsonObj => createTable(jsonObj.data))
+    }
+  </script>
 </body>
 </html>
