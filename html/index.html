@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8" />	
-<link rel="stylesheet" href="style.css" type="text/css">
+<link href="style.css" type="text/css">
 <title>Таблица заказов</title>
 </head>
 <body>
@@ -22,7 +22,7 @@
         tableRow.appendChild(tableRowHeader)
       }
       table.appendChild(tableRow)
-      
+
       for ( let tableElement of Object.values(data)) {
         let tableElementRow = document.createElement('tr');
         for ( let value in tableElement) {
