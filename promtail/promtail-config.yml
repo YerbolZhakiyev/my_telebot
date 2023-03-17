@@ -8,7 +8,7 @@ positions:
 clients:
   - url: http://loki:3100/loki/api/v1/push
 
-local machine logs
+# local machine logs
 scrape_configs:
 - job_name: local
   static_configs:
