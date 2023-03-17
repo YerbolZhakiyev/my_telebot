@@ -2,13 +2,15 @@
 <html>
 <head>
 <meta charset="UTF-8" />	
+<link rel="stylesheet" href="style.css" type="text/css">
 <title>Таблица заказов</title>
 </head>
 <body>
   <h1>Таблица заказов</h1>
+<div class="container"> 
   <table id = "table"></table>
+</div>
   <script>
-
     function createTable(data) {
       console.log(Object.keys(data[0]))
       let table = document.getElementById("table")
@@ -20,7 +22,7 @@
         tableRow.appendChild(tableRowHeader)
       }
       table.appendChild(tableRow)
-
+      
       for ( let tableElement of Object.values(data)) {
         let tableElementRow = document.createElement('tr');
         for ( let value in tableElement) {
