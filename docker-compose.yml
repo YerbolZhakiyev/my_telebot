@@ -52,14 +52,14 @@ services:
     ports: 
       - "3100:3100"
     restart: unless-stopped
-    command: -config.file=/etc/loki/loki-congif.yml
+    command: -config.file=/etc/loki/loki-config.yml
   promtail:
     image: grafana/promtail
     volumes:
       - /var/log:/var/log
       - /root/my_telebot/promtail:/etc/promtail
     restart: unless-stopped
-    command: -config.file=/etc/promtail/promtail-congif.yml
+    command: -config.file=/etc/promtail/promtail-config.yml
   grafana:
     image: grafana/grafana
     user: root
@@ -67,4 +67,4 @@ services:
       - /root/my_telebot/grafana:/var/lib/grafana
     ports:
       - "3000:3000"
-    restart: unless-stopped
+    restart: unless-stopped 
