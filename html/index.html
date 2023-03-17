@@ -20,6 +20,14 @@
         tableRow.appendChild(tableRowHeader)
       }
       table.appendChild(tableRow)
+
+      for ( let tableElement of Object.values(data)) {
+        let tableData = document.createElement('td');
+        console.log(tableData)
+        tableData.textContent = tableElement;
+        tableRow.appendChild(tableData)
+      }
+      table.appendChild(tableRow)        
     }
 
     window.onload = event => {
