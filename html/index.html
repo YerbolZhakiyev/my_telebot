@@ -22,14 +22,16 @@
       table.appendChild(tableRow)
 
       for ( let tableElement of Object.values(data)) {
-        let tableData = document.createElement('td');
-        console.log(tableData)
-        tableData.textContent = tableElement;
-        tableRow.appendChild(tableData)
+        let tableElementRow = document.createElement('tr');
+        for ( let value in tableElement) {
+          let tableData = document.createElement('td');
+          console.log(tableData)
+          tableData.textContent = tableElement[value];
+          tableElementRow.appendChild(tableData)
+        }
+        table.appendChild(tableElementRow)
       }
-      table.appendChild(tableRow)        
-    }
-
+    }  
     window.onload = event => {
       fetch('/api/orders')
       .then( response => response.json())
