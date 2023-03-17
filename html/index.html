@@ -6,7 +6,7 @@
 <title>Таблица заказов</title>
 </head>
 <body>
-  <h1>Таблица заказов</h1>
+  <h1 style="color:whitesmoke;">Таблица заказов</h1>
 <div class="container"> 
   <table id = "table"></table>
 </div>
@@ -22,7 +22,7 @@
         tableRow.appendChild(tableRowHeader)
       }
       table.appendChild(tableRow)
-      
+
       for ( let tableElement of Object.values(data)) {
         let tableElementRow = document.createElement('tr');
         for ( let value in tableElement) {
