@@ -54,7 +54,8 @@ services:
       - /var/log:/var/log
       - /root/my_telebot/promtail:/etc/promtail
       - /var/run/docker.sock:/var/run/docker.sock
-      - /var/lib/docker/containers:/var/lib/docker/containers
+    deploy:
+      mode: global
     restart: unless-stopped
     command: -config.file=/etc/promtail/promtail-config.yml
     networks:
