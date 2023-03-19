@@ -26,6 +26,8 @@ services:
       - /var/lib/postgresql/data:/var/lib/postgresql/data
     #ports: #----------- open port only if pg admin is needed, and then close it
     #  - "5433:5432"
+    networks:
+      - loki
   nginx:
     image: nginx
     user: root
@@ -37,6 +39,8 @@ services:
     restart: always
     depends_on: 
       - backend
+    networks:
+      - loki
   backend:
     build: ./backend
     container_name: my_backend
@@ -50,6 +54,8 @@ services:
       - /root/my_telebot/tg_bot:/tg_bot
       - /root/my_telebot/tg_bot/.env:/tg_bot/.env
     restart: always
+    networks:
+      - loki
   promtail:
     image: grafana/promtail
     volumes:
