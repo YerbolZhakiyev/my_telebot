@@ -42,6 +42,8 @@ services:
     container_name: my_backend
     ports:
       - "8000:8000"
+    networks:
+      - loki
   tg_bot:
     build: ./tg_bot
     volumes:
