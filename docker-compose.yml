@@ -73,7 +73,7 @@ services:
     image: grafana/grafana
     user: root
     volumes:
-      - /root/my_telebot/grafana:/var/lib/grafana
+      - /root/my_telebot/loki/grafana/provisioning/:/etc/grafana/provisioning/
     ports:
       - "3000:3000"
     restart: unless-stopped 
