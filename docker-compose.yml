@@ -2,6 +2,13 @@ version: '3'
 networks:
   loki:
 
+x-logging: &loki-logging
+  driver: json-file
+  options:
+    tag: "{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}"    
+
+
+
 services:
   jenkins:
     image: jenkins/jenkins
@@ -37,17 +44,26 @@ services:
     restart: always
     depends_on: 
       - backend
+    networks:
+      - loki
+    logging: *loki-logging
   backend:
     build: ./backend
     container_name: my_backend
     ports:
       - "8000:8000"
+    networks:
+      - loki
+    logging: *loki-logging
   tg_bot:
     build: ./tg_bot
     volumes:
       - /root/my_telebot/tg_bot:/tg_bot
       - /root/my_telebot/tg_bot/.env:/tg_bot/.env
     restart: always
+    networks:
+      - loki
+    logging: *loki-logging  
   promtail:
     image: grafana/promtail
     volumes:
@@ -60,6 +76,7 @@ services:
     command: -config.file=/etc/promtail/promtail-config.yml
     networks:
       - loki
+    logging: *loki-logging
   loki:
     image: grafana/loki
     volumes:
@@ -70,13 +87,16 @@ services:
     command: -config.file=/etc/loki/loki-config.yml
     networks:
       - loki
+    logging: *loki-logging
   grafana:
     image: grafana/grafana
     user: root
     volumes:
       - /root/my_telebot/grafana:/var/lib/grafana
+      - ./config/grafana/provisioning/:/etc/grafana/provisioning/
     ports:
       - "3000:3000"
     restart: unless-stopped 
     networks:
       - loki
+    logging: *loki-logging  
