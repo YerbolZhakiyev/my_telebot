@@ -1,8 +1,7 @@
 version: '3'
 networks:
   loki:
-PROJECT:
-  name: myapp
+project-name: myapp
 services:
   jenkins:
     image: jenkins/jenkins
