@@ -10,7 +10,7 @@ services:
   jenkins:
     image: jenkins/jenkins
     user: root
-    container_name: my_jenkins
+    container_name: mjenkins
     ports:
       - "8080:8080"
       - "50000:50000"
@@ -23,6 +23,7 @@ services:
 
   db:
     image: postgres
+    container_name: postgres    
     restart: always
     user: root
     environment:
@@ -40,6 +41,7 @@ services:
 
   nginx:
     image: nginx
+    container_name: nginx
     user: root
     ports:
       - "80:80"
@@ -56,7 +58,7 @@ services:
 
   backend:
     build: ./backend
-    container_name: my_backend
+    container_name: backend
     ports:
       - "8000:8000"
     networks:
@@ -66,6 +68,7 @@ services:
 
   tg_bot:
     build: ./tg_bot
+    container_name: tg_bot
     volumes:
       - /root/my_telebot/tg_bot:/tg_bot
       - /root/my_telebot/tg_bot/.env:/tg_bot/.env
@@ -77,6 +80,7 @@ services:
 
   promtail:
     image: grafana/promtail
+    container_name: promtail
     volumes:
       - /var/log:/var/log
       - /root/my_telebot/promtail:/etc/promtail
@@ -91,6 +95,7 @@ services:
 
   loki:
     image: grafana/loki
+    container_name: loki
     volumes:
       - /root/my_telebot/loki:/etc/loki
       - /root/my_telebot/volumes/loki:/loki
@@ -105,6 +110,7 @@ services:
 
   grafana:
     image: grafana/grafana
+    container_name: grafana
     user: root
     volumes:
       - /root/my_telebot/loki/grafana/provisioning/:/etc/grafana/provisioning/
@@ -189,11 +195,12 @@ services:
 
   nginx-exporter:
     image: nginx/nginx-prometheus-exporter:0.4.2
+    container_name: nginx-exporter
     expose:
       - 9113
     command:
       - -nginx.scrape-uri
-      - http://127.0.0.1:8080/stub_status
+      - http://nginx:8080/stub_status
     depends_on:
       - prometheus
     networks:
