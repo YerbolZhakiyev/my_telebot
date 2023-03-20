@@ -199,7 +199,7 @@ services:
     expose:
       - 9113
     command:
-      -nginx.scrape-uri=nginx/stub_status
+      -nginx.scrape-uri=http://nginx/stub_status
     depends_on:
       - prometheus
     networks:
