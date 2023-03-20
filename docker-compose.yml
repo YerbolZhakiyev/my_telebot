@@ -18,7 +18,9 @@ services:
       - /var/lib/docker/volumes/jenkins_volume/_data:/var/jenkins_home
       - /root/.ssh:/root/.ssh
     restart: always
-
+    labels:
+      org.label-schema.group: "monitoring"
+      
   db:
     image: postgres
     restart: always
@@ -33,6 +35,8 @@ services:
     #  - "5433:5432"
     networks:
       - loki
+    labels:
+      org.label-schema.group: "monitoring"
 
   nginx:
     image: nginx
@@ -47,6 +51,8 @@ services:
       - backend
     networks:
       - loki
+    labels:
+      org.label-schema.group: "monitoring"
 
   backend:
     build: ./backend
@@ -55,6 +61,8 @@ services:
       - "8000:8000"
     networks:
       - loki
+    labels:
+      org.label-schema.group: "monitoring"
 
   tg_bot:
     build: ./tg_bot
@@ -64,6 +72,8 @@ services:
     restart: always
     networks:
       - loki
+    labels:
+      org.label-schema.group: "monitoring"
 
   promtail:
     image: grafana/promtail
@@ -76,6 +86,8 @@ services:
     command: -config.file=/etc/promtail/promtail-config.yml
     networks:
       - loki
+    labels:
+      org.label-schema.group: "monitoring"
 
   loki:
     image: grafana/loki
@@ -88,6 +100,8 @@ services:
     command: -config.file=/etc/loki/loki-config.yml
     networks:
       - loki
+    labels:
+      org.label-schema.group: "monitoring"
 
   grafana:
     image: grafana/grafana
@@ -100,6 +114,8 @@ services:
     restart: unless-stopped 
     networks:
       - loki
+    labels:
+      org.label-schema.group: "monitoring"
 
   node-exporter:
     image: prom/node-exporter:latest
@@ -139,6 +155,8 @@ services:
       - 9090
     networks:
       - loki
+    labels:
+      org.label-schema.group: "monitoring"
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.46.0 #gcr.io/google-containers/cadvisor:v0.34.0
