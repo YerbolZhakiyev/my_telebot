@@ -31,7 +31,7 @@ def start(message):
 @bot.message_handler(commands=['web'])
 def insta(msg):
     markup = types.InlineKeyboardMarkup()
-    markup.add(types.InlineKeyboardButton("Веб-Сайт:", url="backend_host"))
+    markup.add(types.InlineKeyboardButton("Веб-Сайт:", url=BACKEND_HOST))
     bot.send_message(msg.chat.id, "Здесь вы можете посмотреть все заказы на сайте", reply_markup=markup)
 #-------------------------------------
 def get_order_id():
