@@ -28,7 +28,7 @@ def start(message):
     headers = {'Content-Type': 'application/json', 'Accept': 'text/plain'}
     response = requests.post('http://backend:8000/api/customers', data=json_data, headers=headers)
 #-------------------------------------
-@bot.message_handler(commands=['insta'])
+@bot.message_handler(commands=['web'])
 def insta(msg):
     markup = types.InlineKeyboardMarkup()
     markup.add(types.InlineKeyboardButton("Веб-Сайт:", url="backend_host"))
