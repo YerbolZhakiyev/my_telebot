@@ -17,7 +17,6 @@
       let tableRow = document.createElement('tr');
       for ( let tableHeader in data[0]) {
         let tableRowHeader = document.createElement('th');
-        console.log(tableHeader)
         tableRowHeader.textContent = tableHeader;
         tableRow.appendChild(tableRowHeader)
       }
@@ -27,7 +26,6 @@
         let tableElementRow = document.createElement('tr');
         for ( let value in tableElement) {
           let tableData = document.createElement('td');
-          console.log(tableData)
           tableData.textContent = tableElement[value];
           tableElementRow.appendChild(tableData)
         }
