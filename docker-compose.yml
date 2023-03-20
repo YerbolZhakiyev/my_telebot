@@ -2,6 +2,9 @@ version: '3'
 networks:
   loki:
     driver: bridge
+volumes:
+    prometheus_data: {}
+    grafana_data: {}
 
 services:
   jenkins:
@@ -15,6 +18,7 @@ services:
       - /var/lib/docker/volumes/jenkins_volume/_data:/var/jenkins_home
       - /root/.ssh:/root/.ssh
     restart: always
+
   db:
     image: postgres
     restart: always
@@ -29,6 +33,7 @@ services:
     #  - "5433:5432"
     networks:
       - loki
+
   nginx:
     image: nginx
     user: root
@@ -42,6 +47,7 @@ services:
       - backend
     networks:
       - loki
+
   backend:
     build: ./backend
     container_name: my_backend
@@ -49,6 +55,7 @@ services:
       - "8000:8000"
     networks:
       - loki
+
   tg_bot:
     build: ./tg_bot
     volumes:
@@ -57,6 +64,7 @@ services:
     restart: always
     networks:
       - loki
+
   promtail:
     image: grafana/promtail
     volumes:
@@ -68,6 +76,7 @@ services:
     command: -config.file=/etc/promtail/promtail-config.yml
     networks:
       - loki
+
   loki:
     image: grafana/loki
     volumes:
@@ -79,6 +88,7 @@ services:
     command: -config.file=/etc/loki/loki-config.yml
     networks:
       - loki
+
   grafana:
     image: grafana/grafana
     user: root
@@ -90,6 +100,7 @@ services:
     restart: unless-stopped 
     networks:
       - loki
+
   node-exporter:
     image: prom/node-exporter:latest
     container_name: node-exporter
@@ -107,6 +118,8 @@ services:
       - 9100
     networks:
       - loki
+    labels:
+      org.label-schema.group: "monitoring"
 
   prometheus:
     image: prom/prometheus:latest
@@ -114,13 +127,32 @@ services:
     restart: unless-stopped
     volumes:
       - /root/my_telebot/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
       - '--web.console.libraries=/etc/prometheus/console_libraries'
       - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
       - '--web.enable-lifecycle'
     expose:
       - 9090
     networks:
       - loki
+
+  cadvisor:
+    image: gcr.io/google-containers/cadvisor:v0.34.0
+    container_name: cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+      # - /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
+    restart: unless-stopped
+    expose:
+      - 8080
+    networks:
+      - loki
+    labels:
+      org.label-schema.group: "monitoring"
