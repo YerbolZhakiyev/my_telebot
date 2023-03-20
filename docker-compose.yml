@@ -183,6 +183,6 @@ services:
     expose:
       - 9091
     networks:
-      - monitor-net
+      - loki
     labels:
       org.label-schema.group: "monitoring"
