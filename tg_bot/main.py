@@ -9,13 +9,16 @@ import json
 dotenv_path = find_dotenv()
 load_dotenv(dotenv_path)
 TOKEN = os.getenv('TGTOKEN')
-bot = telebot.TeleBot(TOKEN)        
+BACKEND_HOST = os.getenv('backend_host')
+
+bot = telebot.TeleBot(TOKEN)   
+
 #-------------------------------------
 @bot.message_handler(commands=['start'])
 def start(message): 
     mess = f'Добро пожаловать, <b>{message.from_user.first_name}</b>!'
     bot.send_message(message.chat.id, mess, parse_mode='html')
-    bot.send_message(message.chat.id, "Для того, чтобы посмотреть все комманды введите " + f"<b>/</b>", parse_mode='html')
+    bot.send_message(message.chat.id, "Для того, чтобы посмотреть все комманды введите: " + f"<b>/</b>", parse_mode='html')
     bot.send_message(message.chat.id, "Для того, чтобы сделать заказ введите " + f"<b>/create_order</b>", parse_mode='html')
     bot.send_message(message.chat.id, "Для того, чтобы посмотреть все заказы " + f"<b>/all_orders</b>", parse_mode='html')
     bot.send_message(message.chat.id, "Спасибо, что используете этого бота.", parse_mode='html')
@@ -28,14 +31,8 @@ def start(message):
 @bot.message_handler(commands=['insta'])
 def insta(msg):
     markup = types.InlineKeyboardMarkup()
-    markup.add(types.InlineKeyboardButton("Instagram:", url="https://www.instagram.com/zhakiev/"))
-    bot.send_message(msg.chat.id, "Instagram", reply_markup=markup)
-#-------------------------------------
-@bot.message_handler(commands=['telegram'])
-def telegram(msg):
-    markup = types.InlineKeyboardMarkup()
-    markup.add(types.InlineKeyboardButton("Telegram:", url="https://t.me/YerbolZ"))
-    bot.send_message(msg.chat.id, "Telegram", reply_markup=markup)
+    markup.add(types.InlineKeyboardButton("Веб-Сайт:", url="backend_host"))
+    bot.send_message(msg.chat.id, "Здесь вы можете посмотреть все заказы на сайте", reply_markup=markup)
 #-------------------------------------
 def get_order_id():
     return int(time.time())
