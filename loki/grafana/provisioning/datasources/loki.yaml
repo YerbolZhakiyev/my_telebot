@@ -1,6 +1,13 @@
 
 apiVersion: 1
 
+query_range:
+  split_queries_by_interval: 24h
+
+frontend:
+  max_outstanding_per_tenant: 1024
+
+
 datasources:
   - name: Loki
     type: loki
