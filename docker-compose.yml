@@ -142,6 +142,7 @@ services:
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor #gcr.io/google-containers/cadvisor:v0.34.0
+    privileged: true
     container_name: cadvisor
     volumes:
       - /:/rootfs:ro
