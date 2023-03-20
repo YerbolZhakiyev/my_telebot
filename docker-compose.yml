@@ -199,8 +199,7 @@ services:
     expose:
       - 9113
     command:
-      - -nginx.scrape-uri
-      - http://64.227.127.179:8080/stub_status
+      -nginx.scrape-uri=http://nginx.production.svc.cluster.local:80/stub_status
     depends_on:
       - prometheus
     networks:
