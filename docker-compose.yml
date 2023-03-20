@@ -1,7 +1,6 @@
 version: '3'
 networks:
   loki:
-  monitoring:
     driver: bridge
 
 services:
@@ -91,7 +90,6 @@ services:
     restart: unless-stopped 
     networks:
       - loki
-      - monitoring
   node-exporter:
     image: prom/node-exporter:latest
     container_name: node-exporter
@@ -108,7 +106,7 @@ services:
     expose:
       - 9100
     networks:
-      - monitoring
+      - loki
 
   prometheus:
     image: prom/prometheus:latest
@@ -125,4 +123,4 @@ services:
     expose:
       - 9090
     networks:
-      - monitoring
+      - loki
