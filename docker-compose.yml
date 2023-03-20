@@ -141,7 +141,7 @@ services:
       - loki
 
   cadvisor:
-    image: gcr.io/google-containers/cadvisor:v0.34.0
+    image: gcr.io/cadvisor/cadvisor #gcr.io/google-containers/cadvisor:v0.34.0
     container_name: cadvisor
     volumes:
       - /:/rootfs:ro
