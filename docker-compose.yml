@@ -10,7 +10,7 @@ services:
   jenkins:
     image: jenkins/jenkins
     user: root
-    container_name: mjenkins
+    container_name: jenkins
     ports:
       - "8080:8080"
       - "50000:50000"
@@ -32,8 +32,8 @@ services:
       POSTGRES_DB: tg_bot
     volumes:
       - /var/lib/postgresql/data:/var/lib/postgresql/data
-    #ports: #----------- open port only if pg admin is needed, and then close it
-    #  - "5433:5432"
+    ports: #----------- open port only if pg admin is needed, and then close it
+      - "5433:5432"
     networks:
       - loki
     labels:
