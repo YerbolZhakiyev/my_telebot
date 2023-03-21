@@ -44,13 +44,13 @@ def create_order(message):
 
 def get_description(message, id):
     order = {"id": id, "description": message.text}
-    bot.send_message(message.chat.id, 'Выберите единицы измерения:')
     markup = telebot.types.ReplyKeyboardMarkup(row_width=1)
     kg = telebot.types.KeyboardButton('Килограмм')
     t = telebot.types.KeyboardButton('Тонны')
     li = telebot.types.KeyboardButton('Литры')
     num = telebot.types.KeyboardButton('Шт.')
     markup.add(kg, t, li, num)
+    bot.send_message(message.chat.id, 'Выберите единицы измерения:', reply_markup=markup)
     bot.register_next_step_handler(message, get_units, order, id)
 
 def get_units(message, order, id):
