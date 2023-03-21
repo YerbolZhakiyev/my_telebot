@@ -5,6 +5,7 @@ from dotenv import load_dotenv, find_dotenv
 import os
 import requests
 import json
+import re
 #-------------------------------------
 dotenv_path = find_dotenv()
 load_dotenv(dotenv_path)
@@ -70,15 +71,25 @@ def get_from(message, order, id):
 
 def get_where(message, order, id):
     order["to_address"] = message.text
-    bot.send_message(message.chat.id, 'Введите Номер телефона:')
+    bot.send_message(message.chat.id, 'Введите номер телефона в формате +7хххххххххх/8хххххххххх:')
     bot.register_next_step_handler(message, get_phone, order, id)
 
 def get_phone(message, order, id):
-    order["phone"] = message.text
-    response = requests.post("http://backend:8000/api/orders", json=order)      
-    with open('/tg_bot/image2.jpeg', 'rb') as photo:
-        bot.send_photo(message.chat.id, photo) 
-    bot.send_message(message.chat.id, f'Заказ успешно создан! Номер вашего заказа: {id} Спасибо!')
+    phone = message.text
+    phone_parsed = re.search("^(\+77|87|\+79)\d{9}$", message)
+    
+    if phone_parsed is None:
+        bot.send_message(message.chat.id, 'Неверный формат.')
+        bot.send_message(message.chat.id, 'Введите номер телефона в формате +7хххххххххх/8хххххххххх:')
+        bot.register_next_step_handler(message, get_phone, order, id)
+    else:
+        order["phone"] = phone_parsed.string
+        response = requests.post("http://backend:8000/api/orders", json=order)      
+        
+        with open('/tg_bot/image2.jpeg', 'rb') as photo:
+            bot.send_photo(message.chat.id, photo)
+
+        bot.send_message(message.chat.id, f'Заказ успешно создан! Номер вашего заказа: {id} Спасибо!')
 #-------------------------------------
 
 dict_num = 0
