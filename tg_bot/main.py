@@ -76,7 +76,7 @@ def get_where(message, order, id):
 
 def get_phone(message, order, id):
     phone = message.text
-    phone_parsed = re.search("^(\+77|87|\+79)\d{9}$", message)
+    phone_parsed = re.search("^(\+77|87|\+79)\d{9}$", phone)
     
     if phone_parsed is None:
         bot.send_message(message.chat.id, 'Неверный формат.')
