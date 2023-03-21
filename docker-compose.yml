@@ -123,7 +123,7 @@ services:
     labels:
       org.label-schema.group: "monitoring"
     environment:
-      GF_SERVER_ROOT_URL: http://${HOST_ADDRESS}/grafana/
+      GF_SERVER_ROOT_URL: http://${HOST_ADDR}/grafana/
 
   node-exporter:
     image: prom/node-exporter:latest
