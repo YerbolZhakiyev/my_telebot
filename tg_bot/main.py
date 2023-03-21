@@ -55,7 +55,7 @@ def get_description(message, id):
 
 def get_units(message, order, id):
     order["units"] = message.text
-    bot.send_message(message.chat.id, 'Введите вес заказа:')
+    bot.send_message(message.chat.id, 'Введите количество:')
     bot.register_next_step_handler(message, get_weight, order, id)
 
 def get_weight(message, order, id):
