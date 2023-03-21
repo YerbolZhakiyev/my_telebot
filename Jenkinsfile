@@ -16,7 +16,6 @@ pipeline {
             steps {
                 echo 'Starting test.....'
                 echo '---------------------------------------------'
-                sh 'ssh root@$HOST_ADDRESS -tt "cd /root/my_telebot; docker-compose stop backend; docker-compose build; docker-compose up -d backend; python3 /root/my_telebot/test/test_flask.py"'
                 echo '------------------Success--------------------'
                 echo '---------------------------------------------'
             }

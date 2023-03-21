@@ -32,8 +32,8 @@ services:
       POSTGRES_DB: tg_bot
     volumes:
       - /var/lib/postgresql/data:/var/lib/postgresql/data
-    ports: #----------- open port only if pg admin is needed, and then close it
-      - "5433:5432"
+    # ports: #----------- open port only if pg admin is needed, and then close it
+    #   - "5433:5432"
     networks:
       - loki
     labels:
@@ -59,10 +59,10 @@ services:
   backend:
     build: ./backend
     container_name: backend
-    ports:
-      - "8000:8000"
     networks:
       - loki
+    expose:
+      - 8000
     labels:
       org.label-schema.group: "monitoring"
 
