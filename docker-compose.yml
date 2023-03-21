@@ -122,6 +122,8 @@ services:
       - loki
     labels:
       org.label-schema.group: "monitoring"
+    args:
+      - URL_GF=${URL_GF}
     environment:
       URL_GF: ${URL_GF}
       GF_SERVER_ROOT_URL: ${URL_GF}
