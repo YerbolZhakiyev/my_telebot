@@ -44,7 +44,6 @@ def orders():
 		cursor.execute("INSERT INTO orders (id, description, units, weight, from_address, to_address, phone, tg_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", (id, description, units, weight, from_address, to_address, phone, tg_id))
 		conn.commit()
 
-
 @app.route('/api/customers', methods = ['GET', 'POST'])
 def customers(): 
 	if request.method == 'GET':
