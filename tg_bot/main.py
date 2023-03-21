@@ -39,31 +39,46 @@ def get_order_id():
 @bot.message_handler(commands=['create_order'])
 def create_order(message):
     id = get_order_id()
-    bot.send_message(message.chat.id, 'Введите описание заказа. Опишите, что хотите отправить и количество товара (Например: Мешки сахара, 6 мешков; Коробки, 4 штуки; Телевизор и т.д.):')
+    bot.send_message(message.chat.id, 'Введите описание заказа. Опишите, что хотите отправить, желательно добавить все детали:')
     bot.register_next_step_handler(message, get_description, id)
+
 def get_description(message, id):
     order = {"id": id, "description": message.text}
-    bot.send_message(message.chat.id, 'Введите вес заказа (Например: 120 киллограммов; 40 литров и т.д.):')
+    bot.send_message(message.chat.id, 'Выберите единицы измерения:')
+    markup = telebot.types.ReplyKeyboardMarkup(row_width=1)
+    kg = telebot.types.KeyboardButton('Килограмм')
+    t = telebot.types.KeyboardButton('Тонны')
+    li = telebot.types.KeyboardButton('Литры')
+    num = telebot.types.KeyboardButton('Шт.')
+    markup.add(kg, t, li, num)
+    bot.register_next_step_handler(message, get_units, order, id)
+
+def get_units(message, order, id):
+    order["units"] = message.text
+    bot.send_message(message.chat.id, 'Введите вес заказа:')
     bot.register_next_step_handler(message, get_weight, order, id)
+
 def get_weight(message, order, id):
     order["weight"] = message.text
     bot.send_message(message.chat.id, 'Введите адрес откуда необходимо забрать заказ:')
     bot.register_next_step_handler(message, get_from, order, id)
+
 def get_from(message, order, id):
     order["from_address"] = message.text
     bot.send_message(message.chat.id, 'Введите адрес куда необходимо доставить заказ:')
     bot.register_next_step_handler(message, get_where, order, id)
+
 def get_where(message, order, id):
     order["to_address"] = message.text
     bot.send_message(message.chat.id, 'Введите Номер телефона:')
     bot.register_next_step_handler(message, get_phone, order, id)
+
 def get_phone(message, order, id):
-    id_for_text = str(id)
     order["phone"] = message.text
     response = requests.post("http://backend:8000/api/orders", json=order)      
     with open('/tg_bot/image2.jpeg', 'rb') as photo:
         bot.send_photo(message.chat.id, photo) 
-    bot.send_message(message.chat.id, 'Заказ успешно создан! Номер вашего заказа: ' + id_for_text + ' Спасибо!')
+    bot.send_message(message.chat.id, f'Заказ успешно создан! Номер вашего заказа: {id} Спасибо!')
 #-------------------------------------
 
 dict_num = 0

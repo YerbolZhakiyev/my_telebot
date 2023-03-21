@@ -26,7 +26,7 @@ def orders():
 		rows = cursor.fetchall()
 		results = []
 		for row in rows:
-			results.append({'id': row[0], 'description': row[1], 'from_address': row[2], 'to_address': row[3], 'weight': row[4], 'phone': row[5]})
+			results.append({'id': row[0], 'description': row[1], 'from_address': row[2], 'to_address': row[3], 'units': row[4], 'weight': row[5], 'phone': row[6]})
 		orders = json.dumps({
 			'data': results
 			}, ensure_ascii = False)
@@ -36,10 +36,11 @@ def orders():
 		id = request_data['id']
 		description = request_data['description']
 		weight = request_data['weight']
+		units = request_data['units']
 		from_address = request_data['from_address']
 		to_address = request_data['to_address']
 		phone = request_data['phone']
-		cursor.execute("INSERT INTO orders (id, description, weight, from_address, to_address, phone) VALUES (%s, %s, %s, %s, %s, %s)", (id, description, weight, from_address, to_address, phone))
+		cursor.execute("INSERT INTO orders (id, description, units, weight, from_address, to_address, phone) VALUES (%s, %s, %s, %s, %s, %s, %s)", (id, description, units, weight, from_address, to_address, phone))
 		conn.commit()
 
 
