@@ -25,7 +25,7 @@ pipeline {
             steps {
                 echo 'Starting Deployment....'
                 echo '---------------------------------------------'
-                sh "ssh root@${HOST_ADDRESS} -tt 'cd /root/my_telebot; docker-compose stop db nginx backend tg_bot; docker-compose build; export 'URL_GF=http://${HOST_ADDRESS}/grafana/'; docker-compose up -d'"
+                sh "ssh root@${HOST_ADDRESS} -tt 'cd /root/my_telebot; docker-compose stop db nginx backend tg_bot; docker-compose build; export URL_GF='http://${HOST_ADDRESS}/grafana/'; docker-compose up -d'"
                 echo '------------------Success--------------------'
                 echo '---------------------------------------------'
             }
