@@ -22,11 +22,11 @@ app = Flask(__name__)
 @app.route('/api/orders', methods = ['GET', 'POST'])
 def orders(): 
 	if request.method == 'GET':
-		cursor.execute("SELECT * FROM orders")
+		cursor.execute("SELECT orders.description, orders.from_address, orders.to_address, orders.weight, orders.units, orders.phone, customers.name AS customer_name FROM orders INNER JOIN customers ON orders.tg_id = customers.tg_id")
 		rows = cursor.fetchall()
 		results = []
 		for row in rows:
-			results.append({'id': row[0], 'description': row[1], 'from_address': row[2], 'to_address': row[3], 'units': row[4], 'weight': row[5], 'phone': row[6]})
+			results.append({'description': row[0], 'from_address': row[1], 'to_address': row[2], 'weight': row[3], 'units': row[4], 'phone': row[5], 'customer_name': row[6]})
 		orders = json.dumps({
 			'data': results
 			}, ensure_ascii = False)
