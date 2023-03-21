@@ -84,6 +84,7 @@ def get_phone(message, order, id):
         bot.register_next_step_handler(message, get_phone, order, id)
     else:
         order["phone"] = phone_parsed.string
+        order["tg_id"] = message.from_user.id
         response = requests.post("http://backend:8000/api/orders", json=order)      
         
         with open('/tg_bot/image2.jpeg', 'rb') as photo:

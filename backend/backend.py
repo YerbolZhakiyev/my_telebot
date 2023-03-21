@@ -40,7 +40,8 @@ def orders():
 		from_address = request_data['from_address']
 		to_address = request_data['to_address']
 		phone = request_data['phone']
-		cursor.execute("INSERT INTO orders (id, description, units, weight, from_address, to_address, phone) VALUES (%s, %s, %s, %s, %s, %s, %s)", (id, description, units, weight, from_address, to_address, phone))
+		tg_id = request_data['tg_id']
+		cursor.execute("INSERT INTO orders (id, description, units, weight, from_address, to_address, phone, tg_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", (id, description, units, weight, from_address, to_address, phone, tg_id))
 		conn.commit()
 
 
