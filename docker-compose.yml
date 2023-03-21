@@ -192,17 +192,3 @@ services:
       - loki
     labels:
       org.label-schema.group: "monitoring"
-
-  nginx-exporter:
-    image: nginx/nginx-prometheus-exporter:0.4.2
-    container_name: nginx-exporter
-    expose:
-      - 9113
-    command:
-      -nginx.scrape-uri=http://nginx:8081/stub_status
-    depends_on:
-      - prometheus
-    networks:
-      - loki
-    labels:
-      org.label-schema.group: "monitoring"
