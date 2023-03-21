@@ -19,7 +19,7 @@ cursor = conn.cursor()
 
 app = Flask(__name__)
 
-@app.route('/api/orders', methods = ['GET', 'POST'])
+@app.route('/orders', methods = ['GET', 'POST'])
 def orders(): 
 	if request.method == 'GET':
 		cursor.execute("SELECT orders.description, orders.from_address, orders.to_address, orders.weight, orders.units, orders.phone, customers.name AS customer_name FROM orders INNER JOIN customers ON orders.tg_id = customers.tg_id")
@@ -44,7 +44,7 @@ def orders():
 		cursor.execute("INSERT INTO orders (id, description, units, weight, from_address, to_address, phone, tg_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", (id, description, units, weight, from_address, to_address, phone, tg_id))
 		conn.commit()
 
-@app.route('/api/customers', methods = ['GET', 'POST'])
+@app.route('/customers', methods = ['GET', 'POST'])
 def customers(): 
 	if request.method == 'GET':
 		cursor.execute("SELECT * FROM customers")
