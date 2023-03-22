@@ -27,6 +27,4 @@ scrape_configs:
   - job_name: 'nginx'
     scrape_interval: 5s
     static_configs:
-      - targets: ['localhost:80']
-        labels:
-          path: /nginx_status
+      - targets: ['localhost:80/nginx_status']
