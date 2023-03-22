@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        URL_GF='http://${HOST_ADDRESS}/grafana/'
+        HOST_ADDR='${HOST_ADDRESS}'
+    }
+
     stages {
         stage('Build') {
             steps {
@@ -25,7 +30,7 @@ pipeline {
             steps {
                 echo 'Starting Deployment....'
                 echo '---------------------------------------------'
-                sh "ssh root@${HOST_ADDRESS} -tt 'cd /root/my_telebot; export URL_GF=http://${HOST_ADDRESS}/grafana/; docker-compose stop db nginx backend tg_bot; docker-compose build; docker-compose up -d'"
+                sh "ssh root@${HOST_ADDRESS} -tt 'cd /root/my_telebot; docker-compose stop db nginx backend tg_bot; docker-compose build; docker-compose up -d'"
                 echo '------------------Success--------------------'
                 echo '---------------------------------------------'
             }
