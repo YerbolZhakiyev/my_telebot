@@ -126,6 +126,7 @@ services:
       GF_SERVER_DOMAIN: ${HOST_ADDR}
       GF_SERVER_ROOT_URL: ${URL_GF}
       GF_SERVER_SERVE_FROM_SUB_PATH: 'true'
+      GF_SECURITY_COOKIE_SAMESITE: 'none'
 
   node-exporter:
     image: prom/node-exporter:latest
