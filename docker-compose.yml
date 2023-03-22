@@ -11,9 +11,9 @@ services:
     image: jenkins/jenkins
     user: root
     container_name: jenkins
-    expose:
-      - 8080
-      - 50000
+    ports
+      - "8080:8080"
+      - "50000:50000"
     volumes:
       - /var/lib/docker/volumes/jenkins_volume/_data:/var/jenkins_home
       - /root/.ssh:/root/.ssh
