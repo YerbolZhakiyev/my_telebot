@@ -13,11 +13,8 @@ services:
     networks:
       - loki
     container_name: jenkins
-    environment:
-      JAVA_OPTS: "-Dhudson.model.DirectoryBrowserSupport.CSP=\"default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';\" -Djenkins.model.DirectoryBrowserSupport.CSP=\"default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';\""
-    expose:
-      - 8080
     ports:
+      - "8080:8080"
       - "50000:50000"
     volumes:
       - /var/lib/docker/volumes/jenkins_volume/_data:/var/jenkins_home
@@ -53,8 +50,6 @@ services:
     volumes:
       - /root/my_telebot/html:/html
       - /root/my_telebot/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - /root/my_telebot/log/nginx:/var/log/nginx
-      - /root/my_telebot/log/nginx/jenkins:/var/log/nginx/jenkins
     restart: always
     links:
       - jenkins:jenkins
