@@ -201,3 +201,14 @@ services:
       - loki
     labels:
       org.label-schema.group: "monitoring"
+
+  alertmanager:
+    container_name: alertmanager
+    hostname: alertmanager
+    image: prom/alertmanager
+    volumes:
+      - /root/my_telebot/alertmanager/alertmanager.conf:/etc/alertmanager/alertmanager.conf
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.conf'
+    expose:
+      - 9093
