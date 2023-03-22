@@ -115,6 +115,7 @@ services:
     volumes:
       - /root/my_telebot/loki/grafana/provisioning/:/etc/grafana/provisioning/
       - /root/my_telebot/volumes/grafana:/var/lib/grafana
+      - /root/my_telebot/loki/grafana/grafana.ini:/etc/grafana/grafana.ini
     ports:
       - "3000:3000"
     restart: unless-stopped 
@@ -125,7 +126,7 @@ services:
     environment:
       GF_SERVER_ROOT_URL: ${URL_GF}
       URL_GF: ${URL_GF}
-      
+
   node-exporter:
     image: prom/node-exporter:latest
     container_name: node-exporter
