@@ -23,8 +23,3 @@ scrape_configs:
     honor_labels: true
     static_configs:
       - targets: ['pushgateway:9091']
-
-  - job_name: 'nginx'
-    scrape_interval: 5s
-    static_configs:
-      - targets: ['localhost:80/nginx_status']
