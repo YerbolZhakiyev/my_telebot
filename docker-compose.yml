@@ -125,7 +125,7 @@ services:
     environment:
       GF_SERVER_DOMAIN: ${HOST_ADDR}
       GF_SERVER_ROOT_URL: ${URL_GF}
-      GF_SERVER_SERVE_FROM_SUB_PATH: true
+      GF_SERVER_SERVE_FROM_SUB_PATH: 1
 
   node-exporter:
     image: prom/node-exporter:latest
