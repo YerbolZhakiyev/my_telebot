@@ -8,8 +8,10 @@ volumes:
 
 services:
   jenkins:
-    image: jenkins/jenkins
+    build: ./jenkins
     user: root
+    networks:
+      - loki
     container_name: jenkins
     ports:
       - "8080:8080"
@@ -17,6 +19,7 @@ services:
     volumes:
       - /var/lib/docker/volumes/jenkins_volume/_data:/var/jenkins_home
       - /root/.ssh:/root/.ssh
+      - /root/my_telebot/jenkins/jenkins-log:/var/log/jenkins
     restart: always
     labels:
       org.label-schema.group: "monitoring"
@@ -40,14 +43,16 @@ services:
       org.label-schema.group: "monitoring"
 
   nginx:
-    image: nginx
+    build: ./nginx
     container_name: nginx
     user: root
     ports:
       - "80:80"
     volumes:
-      - /root/my_telebot/nginx/nginx.conf:/etc/nginx/nginx.conf
       - /root/my_telebot/html:/html
+      - type: bind
+        source: ./jenkins-nginx/nginx.conf
+        target: /etc/nginx/conf.d/default.conf
     restart: always
     depends_on: 
       - backend
