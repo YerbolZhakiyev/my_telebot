@@ -11,7 +11,7 @@ services:
     image: jenkins/jenkins
     user: root
     container_name: jenkins
-    ports
+    ports:
       - "8080:8080"
       - "50000:50000"
     volumes:
