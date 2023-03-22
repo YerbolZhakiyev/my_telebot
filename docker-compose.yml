@@ -99,8 +99,8 @@ services:
     volumes:
       - /root/my_telebot/loki:/etc/loki
       - /root/my_telebot/volumes/loki:/loki
-    ports: 
-      - "3100:3100"
+    expose:
+      - 3100
     restart: unless-stopped
     command: -config.file=/etc/loki/loki-config.yml
     networks:
@@ -115,8 +115,8 @@ services:
     volumes:
       - /root/my_telebot/loki/grafana/provisioning/:/etc/grafana/provisioning/
       - /root/my_telebot/volumes/grafana:/var/lib/grafana
-    ports:
-      - "3000:3000"
+    expose:
+      - 3000
     restart: unless-stopped 
     networks:
       - loki
