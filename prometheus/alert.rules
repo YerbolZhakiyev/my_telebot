@@ -1,11 +1,21 @@
-groups: 
-- name: test
+groups:
+- name: example
   rules:
-  - alert: PrometheusTargetMissing
+
+  # Alert for any instance that is unreachable for >5 minutes.
+  - alert: InstanceDown
     expr: up == 0
-    for: 0m
+    for: 5m
     labels:
-      severity: critical
+      severity: page
     annotations:
-      summary: "Prometheus target missing (instance {{ $labels.instance }})"
-      description: "A Prometheus target has disappeared. An exporter might be crashed. VALUE = {{ $value }}  LABELS: {{ $labels }}"
+      summary: "Instance {{ $labels.instance }} down"
+      description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes."
+
+  # Alert for any instance that has a median request latency >1s.
+  - alert: APIHighRequestLatency
+    expr: api_http_request_latencies_second{quantile="0.5"} > 1
+    for: 10m
+    annotations:
+      summary: "High request latency on {{ $labels.instance }}"
+      description: "{{ $labels.instance }} has a median request latency above 1s (current value: {{ $value }}s)"
