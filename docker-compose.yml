@@ -158,7 +158,7 @@ services:
     restart: unless-stopped
     volumes:
       - /root/my_telebot/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      - prometheus_data:/prometheus
+      - /root/my_telebot/prometheus/alert.rules:/etc/prometheus/rules/
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
