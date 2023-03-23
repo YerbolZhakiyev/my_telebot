@@ -2,7 +2,7 @@ groups:
 - name: nginx-alerts
   rules:
   - alert: nginx-status-code
-    expr: '{container="nginx"} |~ ` 5[0-9][0-9] ` |~ `500|502|503|504`'
+    expr: '{container="nginx"} |~ " 5[0-9][0-9] " |~ "500|502|503|504"'
     for: 1m
     annotations:
       summary: "NGINX status code alert"
