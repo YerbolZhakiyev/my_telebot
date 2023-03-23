@@ -210,5 +210,5 @@ services:
       - /root/my_telebot/alertmanager/alertmanager.conf:/etc/alertmanager/alertmanager.conf
     command:
       - '--config.file=/etc/alertmanager/alertmanager.conf'
-    expose:
-      - 9093
+    ports:
+      - "9093:9093"
