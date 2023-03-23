@@ -214,3 +214,5 @@ services:
       - '--config.file=/etc/alertmanager/alertmanager.conf'
     ports:
       - "9093:9093"
+    networks:
+      - loki
