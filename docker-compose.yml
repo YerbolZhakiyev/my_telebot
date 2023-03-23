@@ -166,8 +166,8 @@ services:
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--storage.tsdb.retention.time=200h'
       - '--web.enable-lifecycle'
-    expose:
-      - 9090
+    ports:
+      - "9090:9090"
     networks:
       - loki
     labels:
