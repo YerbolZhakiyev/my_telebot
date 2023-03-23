@@ -5,7 +5,8 @@ networks:
 volumes:
     prometheus_data: {}
     grafana_data: {}
-
+    alertmanager-data:
+      
 services:
   jenkins:
     image: jenkins/jenkins
@@ -208,6 +209,7 @@ services:
     image: prom/alertmanager
     volumes:
       - /root/my_telebot/alertmanager/alertmanager.conf:/etc/alertmanager/alertmanager.conf
+      - /root/my_telebot/alertmanager/alertmanager-data:/data
     command:
       - '--config.file=/etc/alertmanager/alertmanager.conf'
     ports:
