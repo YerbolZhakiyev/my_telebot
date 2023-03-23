@@ -216,3 +216,12 @@ services:
       - "9093:9093"
     networks:
       - loki
+
+  nginx-exporter:
+    image: nginx/nginx-prometheus-exporter
+    ports:
+      - "9113:9113"
+    environment:
+      - NGINX_SCRAPE_URI=http://nginx:80/status
+      - NGINX_METRICS_TYPE=stub_status
+      - NGINX_METRICS_ENDPOINT=/metrics
