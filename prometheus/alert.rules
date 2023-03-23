@@ -19,3 +19,15 @@ groups:
     annotations:
       summary: "High request latency on {{ $labels.instance }}"
       description: "{{ $labels.instance }} has a median request latency above 1s (current value: {{ $value }}s)"
+
+- name: nginx-alerts
+  rules:
+  - alert: nginx-5xx-errors
+    expr: 'count_over_time({app="nginx"} |= " 5[0-9][0-9] " |~ "500|502|503|504"[1m]) > 0'
+    for: 1m
+    annotations:
+      summary: "NGINX 5xx error alert"
+      description: "NGINX container {{ $labels.container }} on pod {{ $labels.pod }} has experienced 5xx errors. Full log message: {{ $value }}"
+      telegram:
+        chat_id: "447574438"
+        message: "{{ .CommonAnnotations.description }}"
