@@ -221,8 +221,9 @@ services:
     image: nginx/nginx-prometheus-exporter:0.9.0
     ports:
       - "9113:9113"
-    environment:
-      - NGINX_PROMETHEUS_METRICS_ADDR=nginx:80/stub_status
+    command:
+      - -nginx.scrape-uri
+      - http://nginx:80/nginx_status
     depends_on:
       - nginx
     networks:
