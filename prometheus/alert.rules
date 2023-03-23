@@ -1,12 +1,21 @@
 groups:
-- name: nginx-alerts
+- name: example
   rules:
-  - alert: nginx-status-code
-    expr: 'contains(container, "nginx") and (contains(log, " 500 ") or contains(log, " 502 ") or contains(log, " 503 ") or contains(log, " 504 "))'
-    for: 1m
-    annotations:
-      summary: "NGINX status code alert"
-      description: "{{ $value }} status code detected in container {{ $labels.container }} on pod {{ $labels.pod }}. Full log message: {{ $value }}"
-      telegram_message: "{{ $value }}"
+
+
+  - alert: InstanceDown
+    expr: up == 0
+    for: 5m
     labels:
-      severity: warning
+      severity: page
+    annotations:
+      summary: "Instance {{ $labels.instance }} down"
+      description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes."
+
+
+  - alert: APIHighRequestLatency
+    expr: api_http_request_latencies_second{quantile="0.5"} > 1
+    for: 10m
+    annotations:
+      summary: "High request latency on {{ $labels.instance }}"
+      description: "{{ $labels.instance }} has a median request latency above 1s (current value: {{ $value }}s)"
