@@ -2,10 +2,11 @@ groups:
 - name: nginx-alerts
   rules:
   - alert: nginx-status-code
-  	expr: '{container="nginx"} |~ / 5[0-9][0-9] / |~ /500|502|503|504/'
+    expr: '{container="nginx"} |~ " 5[0-9][0-9] " |~ "500|502|503|504"'
     for: 1m
     annotations:
       summary: "NGINX status code alert"
-      description: "{{ $value }} status code detected in container {{ $labels.container }} on pod {{ $labels.pod }}. Log message: {{ $labels.log }}"
+      description: "{{ $value }} status code detected in container {{ $labels.container }} on pod {{ $labels.pod }}. Full log message: {{ $value }}"
+      telegram_message: "{{ $value }}"
     labels:
       severity: warning
