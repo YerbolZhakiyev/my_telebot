@@ -13,6 +13,7 @@ datasources:
     type: loki
     url: http://loki:3100
     isDefault: true
+    
   - name: Prometheus
     type: prometheus
     access: proxy
@@ -21,3 +22,13 @@ datasources:
     basicAuth: false
     isDefault: false
     editable: true
+      
+  - name: Alertmanager
+    type: alertmanager
+    access: proxy
+    url: http://alertmanager:9093
+    jsonData:
+      implementation: 'prometheus'
+    basicAuth: false
+    basicAuthUser: 
+    basicAuthPassword: 
