@@ -14,9 +14,8 @@ services:
     networks:
       - loki
     container_name: jenkins
-    expose:
-      - "8080:8080"
     ports:
+      - "8888:8888"
       - "50000:50000"
     volumes:
       - /var/lib/docker/volumes/jenkins_volume/_data:/var/jenkins_home
