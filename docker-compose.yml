@@ -226,6 +226,6 @@ services:
       - NGINX_SCRAPE_URI=http://nginx:80/status
       - NGINX_METRICS_TYPE=stub_status
       - NGINX_METRICS_ENDPOINT=/metrics
-    command: ["nginx-prometheus-exporter", "-nginx.scrape-uri=http://nginx:80/stub_status"]
+    command: ["nginx-prometheus-exporter", "-nginx.scrape-uri=http://${HOST_ADDR}:80/stub_status"]
     networks:
       - loki
