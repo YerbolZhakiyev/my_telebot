@@ -43,7 +43,7 @@ services:
       org.label-schema.group: "monitoring"
 
   nginx:
-    image: "nginx:latest"
+    build: ./nginx
     container_name: nginx
     user: root
     ports:
