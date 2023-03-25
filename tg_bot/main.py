@@ -103,7 +103,7 @@ def send_orders(message):
     num_dicts = len(orders_array)
     
     def send_order_message(chat_id, dicti):
-        markup = telebot.types.ReplyKeyboardMarkup(row_width=2)
+        markup = telebot.types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
         previous_button = telebot.types.KeyboardButton('Предыдущий заказ')
         next_button = telebot.types.KeyboardButton('Следующий заказ')
         markup.add(previous_button, next_button)
