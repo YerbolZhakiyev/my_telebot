@@ -23,9 +23,7 @@ services:
     restart: always
     labels:
       org.label-schema.group: "monitoring"
-    environment:
-      - JAVA_OPTS=-Xms50m -Xmx100m -XX:MaxPermSize=50m -XX:ReservedCodeCacheSize=50m
-      
+
   db:
     image: postgres
     container_name: postgres    
