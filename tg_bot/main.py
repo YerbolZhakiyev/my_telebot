@@ -27,7 +27,7 @@ def start(message):
     id_of_customer = message.from_user.id
     json_data = json.dumps({'name': name_of_customer, 'tg_id': id_of_customer})
     headers = {'Content-Type': 'application/json', 'Accept': 'text/plain'}
-    response = requests.post(f'{BACKEND_HOST}/api/customers', data=json_data, headers=headers)
+    response = requests.post(f'{BACKEND_HOST}/customers', data=json_data, headers=headers)
 #-------------------------------------
 @bot.message_handler(commands=['web'])
 def insta(msg):
@@ -97,7 +97,7 @@ dict_num = 0
 @bot.message_handler(commands=['all_orders'])
 def send_orders(message):
     chat_id = message.chat.id
-    response = requests.get(f'{BACKEND_HOST}/api/orders')
+    response = requests.get(f'{BACKEND_HOST}/orders')
     json_obj = response.json()
     orders_array = json_obj['data']
     num_dicts = len(orders_array)
