@@ -167,8 +167,8 @@ services:
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--storage.tsdb.retention.time=200h'
       - '--web.enable-lifecycle'
-    ports:
-      - "9090:9090"
+    expose:
+      - 9090
     networks:
       - loki
     labels:
@@ -191,41 +191,3 @@ services:
       - loki
     labels:
       org.label-schema.group: "monitoring"
-
-  pushgateway:
-    image: prom/pushgateway:v1.5.1
-    container_name: pushgateway
-    restart: unless-stopped
-    expose:
-      - 9091
-    networks:
-      - loki
-    labels:
-      org.label-schema.group: "monitoring"
-
-  alertmanager:
-    container_name: alertmanager
-    hostname: alertmanager
-    image: prom/alertmanager
-    volumes:
-      - /root/my_telebot/alertmanager/alertmanager.conf:/etc/alertmanager/alertmanager.conf
-      - /root/my_telebot/alertmanager/alertmanager-data:/data
-    command:
-      - '--config.file=/etc/alertmanager/alertmanager.conf'
-    ports:
-      - "9093:9093"
-    networks:
-      - loki
-
-  nginx-exporter:
-    container_name: nginx_exporter
-    image: nginx/nginx-prometheus-exporter:0.9.0
-    ports:
-      - "9113:9113"
-    command:
-      - -nginx.scrape-uri
-      - http://nginx:80/nginx_status
-    depends_on:
-      - nginx
-    networks:
-      - loki
