@@ -11,7 +11,7 @@ dotenv_path = find_dotenv()
 load_dotenv(dotenv_path)
 TOKEN = os.getenv('TGTOKEN')
 BACKEND_HOST = os.getenv('backend_host')
-
+HOST_ADDRESS = os.getenv('HOST_ADDRESS')
 bot = telebot.TeleBot(TOKEN)   
 
 #-------------------------------------
@@ -32,7 +32,7 @@ def start(message):
 @bot.message_handler(commands=['web'])
 def insta(msg):
     markup = types.InlineKeyboardMarkup()
-    markup.add(types.InlineKeyboardButton("Веб-Сайт:", url=BACKEND_HOST))
+    markup.add(types.InlineKeyboardButton("Веб-Сайт:", url=HOST_ADDRESS))
     bot.send_message(msg.chat.id, "Здесь вы можете посмотреть все заказы на сайте", reply_markup=markup)
 #-------------------------------------
 def get_order_id():
