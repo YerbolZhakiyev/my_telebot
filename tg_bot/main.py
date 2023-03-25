@@ -107,7 +107,7 @@ def send_orders(message):
         previous_button = telebot.types.KeyboardButton('Предыдущий заказ')
         next_button = telebot.types.KeyboardButton('Следующий заказ')
         markup.add(previous_button, next_button)
-        bot.send_message(chat_id, f"Описание: {dicti['description']}\nОткуда: {dicti['from_address']}\nКуда: {dicti['to_address']}\nЕд. измерения: {dicti['units']}\nВес: {dicti['weight']}\nТелефон: ||{dicti['phone']||}", reply_markup=markup)
+        bot.send_message(chat_id, f"Описание: {dicti['description']}\nОткуда: {dicti['from_address']}\nКуда: {dicti['to_address']}\nЕд. измерения: {dicti['units']}\nВес: {dicti['weight']}\nТелефон: {dicti['phone']}", reply_markup=markup)
 
     dicti = orders_array[dict_num]
     send_order_message(chat_id, dicti)
