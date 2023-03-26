@@ -42,7 +42,6 @@ services:
       - loki
     labels:
       org.label-schema.group: "monitoring"
-    command: bash -c "pg_dump -U postgres tg_bot > /backup/tg_bot_`date +%Y-%m-%d_%H-%M-%S`.sql"
 
   nginx:
     image: "nginx:latest"
