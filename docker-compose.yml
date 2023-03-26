@@ -114,6 +114,7 @@ services:
   grafana:
     image: grafana/grafana
     container_name: grafana
+    user: root    
     volumes:
       - /root/my_telebot/loki/grafana/provisioning/:/etc/grafana/provisioning/
       - /root/my_telebot/volumes/grafana:/var/lib/grafana
