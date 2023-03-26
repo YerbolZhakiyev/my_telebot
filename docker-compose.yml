@@ -10,7 +10,6 @@ volumes:
 services:
   jenkins:
     image: jenkins/jenkins
-    user: root
     networks:
       - loki
     container_name: jenkins
