@@ -27,7 +27,7 @@ services:
     image: postgres
     container_name: postgres    
     restart: always
-    user: root
+    # user: root
     environment:
       POSTGRES_USER: erbol
       POSTGRES_PASSWORD: password
