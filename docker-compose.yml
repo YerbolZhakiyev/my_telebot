@@ -10,6 +10,7 @@ volumes:
 services:
   jenkins:
     image: jenkins/jenkins
+    user: root
     networks:
       - loki
     container_name: jenkins
@@ -22,18 +23,18 @@ services:
     restart: always
     labels:
       org.label-schema.group: "monitoring"
-
+      
   db:
     image: postgres
     container_name: postgres    
     restart: always
+    user: root
     environment:
       POSTGRES_USER: erbol
       POSTGRES_PASSWORD: password
       POSTGRES_DB: tg_bot
     volumes:
       - /var/lib/postgresql/data:/var/lib/postgresql/data
-      - ./backup:/backup
     # ports: #----------- open port only if pg admin is needed, and then close it
     #   - "5433:5432"
     networks:
@@ -44,7 +45,7 @@ services:
   nginx:
     image: "nginx:latest"
     container_name: nginx
-    # user: root
+    user: root
     ports:
       - "80:80"
     volumes:
