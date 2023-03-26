@@ -35,12 +35,14 @@ services:
       POSTGRES_DB: tg_bot
     volumes:
       - /var/lib/postgresql/data:/var/lib/postgresql/data
+      - ./backup:/backup
     # ports: #----------- open port only if pg admin is needed, and then close it
     #   - "5433:5432"
     networks:
       - loki
     labels:
       org.label-schema.group: "monitoring"
+    command: bash -c "pg_dump -U postgres tg_bot > /backup/tg_bot_`date +%Y-%m-%d_%H-%M-%S`.sql"
 
   nginx:
     image: "nginx:latest"
