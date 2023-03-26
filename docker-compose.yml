@@ -27,7 +27,6 @@ services:
     image: postgres
     container_name: postgres    
     restart: always
-    # user: root
     environment:
       POSTGRES_USER: erbol
       POSTGRES_PASSWORD: password
@@ -45,7 +44,7 @@ services:
   nginx:
     image: "nginx:latest"
     container_name: nginx
-    user: root
+    # user: root
     ports:
       - "80:80"
     volumes:
