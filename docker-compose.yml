@@ -23,12 +23,11 @@ services:
     restart: always
     labels:
       org.label-schema.group: "monitoring"
-      
+
   db:
     image: postgres
     container_name: postgres    
     restart: always
-    user: root
     environment:
       POSTGRES_USER: erbol
       POSTGRES_PASSWORD: password
@@ -45,7 +44,6 @@ services:
   nginx:
     image: "nginx:latest"
     container_name: nginx
-    user: root
     ports:
       - "80:80"
     volumes:
@@ -116,7 +114,6 @@ services:
   grafana:
     image: grafana/grafana
     container_name: grafana
-    user: root
     volumes:
       - /root/my_telebot/loki/grafana/provisioning/:/etc/grafana/provisioning/
       - /root/my_telebot/volumes/grafana:/var/lib/grafana
