@@ -17,7 +17,7 @@ def test_get_2():
     assert orders_array[0][0] == 'ABCD', 'Test 2 ERROR'
     assert orders_array[1][1] == 'ABCD', 'Test 2 ERROR'
 
-def test_post()
+def test_post():
     name = 'John Smith'
     id = 123
     json_data = json.dumps({'name': name, 'tg_id': id})
