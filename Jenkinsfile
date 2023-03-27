@@ -4,30 +4,25 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Starting git pull.....'
-                echo '---------------------------------------------'
+                echo 'Starting git pull'
                 sh 'ssh root@$HOST_ADDRESS -tt "cd /root/my_telebot; git pull origin"'
                 echo '------------------Success--------------------'
-                echo '---------------------------------------------'
             }
         }
 
-        stage('Testing backend') {
+        stage('Testing') {
             steps {
-                echo 'Starting test.....'
-                echo '---------------------------------------------'
+                echo 'Starting tests.....'
+                sh "ssh root@${HOST_ADDRESS} -tt 'cd /root/my_telebot/test; docker-compose build; docker-compose up -d; docker logs tests; docker-compose stop'"
                 echo '------------------Success--------------------'
-                echo '---------------------------------------------'
             }
         }
 
         stage('Deploy') {
             steps {
                 echo 'Starting Deployment....'
-                echo '---------------------------------------------'
                 sh "ssh root@${HOST_ADDRESS} -tt 'cd /root/my_telebot; export URL_GF=http://${HOST_ADDRESS}/grafana/; export HOST_ADDR=${HOST_ADDRESS}; docker-compose stop db nginx backend tg_bot; docker-compose build; docker-compose up -d'"
                 echo '------------------Success--------------------'
-                echo '---------------------------------------------'
             }
         }
     }
