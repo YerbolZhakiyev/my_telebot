@@ -25,33 +25,22 @@ services:
       org.label-schema.group: "monitoring"
 
   db:
-    image: postgres
+    build: ./db
     container_name: postgres    
     restart: always
-    environment:
-      POSTGRES_USER: erbol
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: tg_bot
     volumes:
       - /var/lib/postgresql/data:/var/lib/postgresql/data
-    # ports: #----------- open port only if pg admin is needed, and then close it
-    #   - "5433:5432"
     networks:
       - loki
     labels:
       org.label-schema.group: "monitoring"
 
   nginx:
-    image: "nginx:latest"
+    build: ./nginx
     container_name: nginx
     ports:
       - "80:80"
-    volumes:
-      - /root/my_telebot/html:/html
-      - /root/my_telebot/nginx/nginx.conf:/etc/nginx/nginx.conf
     restart: always
-    links:
-      - jenkins:jenkins
     depends_on: 
       - backend
     networks:
@@ -64,8 +53,6 @@ services:
     container_name: backend
     networks:
       - loki
-    expose:
-      - 8000
     labels:
       org.label-schema.group: "monitoring"
 

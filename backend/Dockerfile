@@ -1,5 +1,6 @@
 FROM python:3.9-slim-buster
 WORKDIR /backend
+EXPOSE 8000
 COPY requirements.txt requirements.txt
 COPY .env .env
 RUN pip3 install -r requirements.txt
