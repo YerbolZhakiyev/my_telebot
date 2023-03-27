@@ -1,5 +1,5 @@
 FROM nginx:latest
 
 RUN apt-get update && apt-get install -y
-
-COPY ../html/ /html
+RUN mkdir /html
+COPY ../html/ /html/
