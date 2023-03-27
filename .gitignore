@@ -1,3 +1,4 @@
 tg_bot/.env
 backend/.env
 test/.env
+test/test_backend/.env
