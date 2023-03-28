@@ -1,16 +1,16 @@
 version: '3'
 services:
-  test_db:
+  db:
     build: ../db
-    container_name: test_postgres    
+    container_name: postgres    
     restart: always
     volumes:
       - /root/my_telebot/test/test_db/02-data.sql:/docker-entrypoint-initdb.d/02-data.sql
 
-  test_backend:
+  backend:
     build: ../backend
     restart: unless-stopped
-    container_name: test_backend
+    container_name: backend
 
   tests:
     build: .
