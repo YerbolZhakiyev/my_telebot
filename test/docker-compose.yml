@@ -2,7 +2,7 @@ version: '3'
 services:
   db:
     build: ../db
-    container_name: postgres    
+    container_name: test_postgres    
     restart: always
     volumes:
       - /root/my_telebot/test/test_db/02-data.sql:/docker-entrypoint-initdb.d/02-data.sql
@@ -10,7 +10,7 @@ services:
   backend:
     build: ../backend
     restart: unless-stopped
-    container_name: backend
+    container_name: test_backend
 
   tests:
     build: .
