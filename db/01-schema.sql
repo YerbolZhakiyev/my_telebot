@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS public.customers (
 );
 
 
-ALTER TABLE public.customers OWNER TO postgres;
+ALTER TABLE public.customers OWNER TO erbol;
 
 --
 -- Name: orders; Type: TABLE; Schema: public; Owner: postgres
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS public.orders (
 );
 
 
-ALTER TABLE public.orders OWNER TO postgres;
+ALTER TABLE public.orders OWNER TO erbol;
 
 --
 -- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -63,7 +63,7 @@ CREATE SEQUENCE public.orders_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.orders_id_seq OWNER TO postgres;
+ALTER TABLE public.orders_id_seq OWNER TO erbol;
 
 --
 -- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
