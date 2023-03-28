@@ -17,4 +17,4 @@ services:
     container_name: tests
     restart: unless-stopped
     depends_on:
-      - test_backend
+      - backend
