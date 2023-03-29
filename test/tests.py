@@ -27,6 +27,7 @@ def test_post():
     name = 'John Smith'
     id = 123
     json_data = json.dumps({'name': name, 'tg_id': id})
+    print json_data
     headers = {'Content-Type': 'application/json', 'Accept': 'text/plain'}
     response = requests.post('http://backend:8000/customers', data=json_data, headers=headers)
     assert response.status_code == 200, 'Response status Test 3 success'
