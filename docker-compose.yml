@@ -30,9 +30,6 @@ services:
     restart: always
     volumes:
       - /var/lib/postgresql/data:/var/lib/postgresql/data
-    depends_on: 
-      backend:
-        condition: service_healthy
     networks:
       - loki
     labels:
@@ -56,8 +53,8 @@ services:
     container_name: backend
     healthcheck:
       test: ["CMD-SHELL", "curl http://localhost:8000/healthcheck || exit 1"]
-      interval: 5s
-      timeout: 30s
+      interval: 1s
+      timeout: 10s
       retries: 10
     networks:
       - loki
