@@ -15,8 +15,8 @@ def test_get_2():
     json_obj = response.json()
     orders_array = json_obj['data']
     assert response.status_code == 200, 'Response status Test 2 ERROR'
-    assert orders_array[0]['description'] == 'ABCD', 'Test 2 ERROR'
-    assert orders_array[1]['from_address'] == 'ABCD', 'Test 2 ERROR'
+    assert orders_array[0]['description'] == 'ABCD', 'Test 2 success'
+    assert orders_array[1]['from_address'] == 'ABCD', 'Test 2 success'
 
 def test_post():
     name = 'John Smith'
@@ -24,7 +24,7 @@ def test_post():
     json_data = json.dumps({'name': name, 'tg_id': id})
     headers = {'Content-Type': 'application/json', 'Accept': 'text/plain'}
     response = requests.post('http://backend:8000/customers', data=json_data, headers=headers)
-    assert response.status_code == 200, 'Response status Test 3 ERROR'
+    assert response.status_code == 200, 'Response status Test 3 success'
 
 test_get_1()
 test_post()
