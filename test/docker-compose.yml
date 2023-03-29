@@ -12,9 +12,9 @@ services:
     restart: always
     healthcheck:
       test: ["CMD-SHELL", "curl http://localhost:8000/healthcheck || exit 1"]
-      interval: 1s
+      interval: 3s
       timeout: 10s
-      retries: 10
+      retries: 5
     container_name: test_backend
     depends_on: 
       - db
