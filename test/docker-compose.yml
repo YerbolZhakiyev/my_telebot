@@ -14,7 +14,7 @@ services:
     build: ../backend
     restart: unless-stopped
     healthcheck:
-      test: "CMD-SHELL", "curl http://localhost:8000/healthcheck 10 exit 1"]
+      test: ["CMD-SHELL", "curl http://localhost:8000/healthcheck || exit 1"]
       interval: 5s
       timeout: 1s
       retries: 5
