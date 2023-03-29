@@ -27,5 +27,5 @@ def test_post():
     assert response.status_code == 200, 'Response status Test 3 ERROR'
 
 test_get_1()
-test_get_2()
 test_post()
+test_get_2()
