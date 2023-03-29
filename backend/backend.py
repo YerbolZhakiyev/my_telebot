@@ -66,10 +66,6 @@ def customers():
 			cursor.execute("INSERT INTO customers (name, tg_id) VALUES (%s, %s)", [name, tg_id])
 			conn.commit()
 
-@app.route('/healthcheck', methods = ['GET'])
-def healthcheck():
-	if request.method == 'GET':
-		return "Success"
 
 if __name__ == '__main__':
 	app.run(debug=True)
