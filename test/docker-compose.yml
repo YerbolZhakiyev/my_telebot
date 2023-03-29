@@ -16,8 +16,8 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "curl http://localhost:8000/healthcheck || exit 1"]
       interval: 5s
-      timeout: 1s
-      retries: 5
+      timeout: 30s
+      retries: 10
     container_name: test_backend
 
   tests:
