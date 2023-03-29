@@ -51,11 +51,6 @@ services:
   backend:
     build: ./backend
     container_name: backend
-    healthcheck:
-      test: ["CMD-SHELL", "curl http://localhost:8000/healthcheck || exit 1"]
-      interval: 1s
-      timeout: 10s
-      retries: 10
     networks:
       - loki
     labels:
