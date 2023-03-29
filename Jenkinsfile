@@ -13,8 +13,11 @@ pipeline {
         stage('Testing') {
             steps {
                 echo 'Starting tests.....'
-                sh "ssh root@${HOST_ADDRESS} -tt 'cd /root/my_telebot; docker-compose stop db backend; cd /root/my_telebot/test; docker-compose build; docker-compose up -d backend db; docker-compose up -d tests; docker-compose logs -t tests > test_logs.txt; docker-compose down'"
-                sh "ssh root@${HOST_ADDRESS} -tt 'cd /root/my_telebot/test; cat test_logs.txt'"
+                sh "ssh root@${HOST_ADDRESS} -tt 'cd /root/my_telebot; docker-compose stop db backend; cd /root/my_telebot/test; docker-compose build; docker-compose up -d backend db; docker-compose up -d tests'"
+                sh "ssh root@${HOST_ADDRESS} -tt 'cd /root/my_telebot/test; docker-compose ps'"
+                sh "ssh root@${HOST_ADDRESS} -tt 'cd /root/my_telebot/test; docker-compose logs -t tests > test_logs.txt'"
+                sh "ssh root@${HOST_ADDRESS} -tt 'cd /root/my_telebot/test; cat test_logs.txt '"
+                sh "ssh root@${HOST_ADDRESS} -tt 'cd /root/my_telebot/test; docker-compose down'"                
                 echo '------------------Success--------------------'
             }
         }
