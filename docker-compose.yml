@@ -46,9 +46,6 @@ services:
     restart: always
     volumes:
       - /root/my_telebot/nginx/nginx.conf:/etc/nginx/nginx.conf
-    depends_on: 
-      backend:
-        condition: service_healthy
     networks:
       - loki
     labels:
