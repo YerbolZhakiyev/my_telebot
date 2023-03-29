@@ -6,24 +6,23 @@ services:
     restart: always
     volumes:
       - /root/my_telebot/test/test_db/02-data.sql:/docker-entrypoint-initdb.d/02-data.sql
-    depends_on: 
-      backend:
-        condition: service_healthy
 
   backend:
     build: ../backend
-    restart: unless-stopped
+    restart: always
     healthcheck:
       test: ["CMD-SHELL", "curl http://localhost:8000/healthcheck || exit 1"]
       interval: 5s
       timeout: 30s
       retries: 10
     container_name: test_backend
+    depends_on: 
+      - db
 
   tests:
     build: .
     container_name: tests
-    restart: unless-stopped
+    restart: always
     depends_on: 
       backend:
         condition: service_healthy
