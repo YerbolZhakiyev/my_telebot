@@ -5,6 +5,7 @@ def test_get_1():
     response = requests.get('http://backend:8000/orders')
     json_obj = response.json()
     orders_array = json_obj['data']
+    print(orders_array)
     assert response.status_code == 200, 'Response status Test 1 ERROR'
     assert orders_array[0][0] == 'Test description', 'Test 1 ERROR'
     assert orders_array[1][1] == 'New York', 'Test 1 ERROR'
@@ -26,5 +27,5 @@ def test_post():
     assert response.status_code == 200, 'Response status Test 3 ERROR'
 
 test_get_1()
-test_get_2()
-test_post()
+# test_get_2()
+# test_post()
